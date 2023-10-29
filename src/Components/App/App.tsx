@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import './App.css';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Page from '../Page/Page';
 
