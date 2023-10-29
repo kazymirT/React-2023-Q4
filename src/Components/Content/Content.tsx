@@ -1,8 +1,7 @@
 import './style.css';
 import React from 'react';
 import { ContentProps } from '../../type/type';
-import ChildComponent from '../ChildComponent/ChildComponent';
-
+import ChildComponent from '../ChildComponent/ChildComponents';
 export default class Content extends React.Component<ContentProps> {
   render(): React.ReactNode {
     const items = this.props.data;
