@@ -7,7 +7,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     this.state = {
-      inputValue: this.props.value ? this.props.value : '',
+      inputValue: '',
     };
   }
   componentDidMount(): void {

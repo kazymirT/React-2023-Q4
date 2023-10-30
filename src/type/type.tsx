@@ -8,12 +8,10 @@ export type PageState = {
 };
 
 export type HeaderProps = {
-  value: string | null;
   onClick: (value: string) => void;
 };
 
 export type SearchProps = {
-  value: string | null;
   onClick: (value: string) => void;
 };
 

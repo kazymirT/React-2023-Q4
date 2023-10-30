@@ -8,7 +8,7 @@ export default class Header extends React.Component<HeaderProps> {
     return (
       <div>
         <ErrorBtn />
-        <Search value={this.props.value} onClick={this.props.onClick} />
+        <Search onClick={this.props.onClick} />
       </div>
     );
   }

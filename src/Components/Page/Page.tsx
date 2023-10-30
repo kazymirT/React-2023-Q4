@@ -19,10 +19,7 @@ export default class Page extends React.Component<PageProps, PageState> {
     return (
       <div>
         <div>
-          <Header
-            value={this.state.searchValue}
-            onClick={this.handleSearchInputChange}
-          />
+          <Header onClick={this.handleSearchInputChange} />
           <Content data={this.state.searchValue} />
         </div>
       </div>
