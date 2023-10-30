@@ -1,0 +1,15 @@
+.content h2 {
+  text-align: center;
+}
+.content > div {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.no-result {
+  text-align: center;
+  font-size: 34px;
+}
