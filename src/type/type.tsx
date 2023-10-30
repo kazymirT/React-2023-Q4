@@ -4,18 +4,16 @@ import { Character } from 'rickmortyapi';
 export type PageProps = object;
 
 export type PageState = {
-  searchValue: string;
-  isLoader: boolean;
-  data: null | Character[];
+  searchValue: string | null;
 };
 
 export type HeaderProps = {
-  value: string;
+  value: string | null;
   onClick: (value: string) => void;
 };
 
 export type SearchProps = {
-  value: string;
+  value: string | null;
   onClick: (value: string) => void;
 };
 
@@ -24,6 +22,11 @@ export type SearchState = {
 };
 
 export type ContentProps = {
+  data: string | null;
+};
+
+export type ComponentState = {
+  isLoader: boolean;
   data: Character[] | null;
 };
 
