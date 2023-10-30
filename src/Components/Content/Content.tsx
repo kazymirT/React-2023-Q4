@@ -17,10 +17,6 @@ export default class Content extends React.Component<
     };
   }
 
-  // componentDidMount() {
-  //   this.loadData('');
-  // }
-
   componentDidUpdate(prevProps: ContentProps) {
     if (prevProps.data !== this.props.data) {
       this.setState({ data: null });
