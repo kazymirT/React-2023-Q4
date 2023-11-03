@@ -16,16 +16,19 @@ export type SearchProps = {
 };
 
 export type SearchState = {
-  inputValue: string;
+  value: string;
 };
 
 export type ContentProps = {
   data: string | null;
 };
 
-export type ComponentState = {
+export type ComponentLoader = {
   isLoader: boolean;
-  data: Character[] | null;
+};
+
+export type ComponentDate = {
+  date: Character[] | null;
 };
 
 export type ChildrenContentProps = {

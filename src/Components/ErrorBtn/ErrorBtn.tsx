@@ -1,26 +1,20 @@
 import './style.css';
-import React from 'react';
-import { ErrorBtnProps, ErrorBtnState } from '../../type/type';
+import { useState } from 'react';
 
-export default class ErrorBtn extends React.Component<
-  ErrorBtnProps,
-  ErrorBtnState
-> {
-  constructor(props: object) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  handleClick = () => {
-    this.setState({ hasError: true });
+export const ErrorBtn = () => {
+  const [state, setState] = useState({ hasError: false });
+
+  const handleClick = () => {
+    setState({ hasError: true });
   };
-  render(): React.ReactNode {
-    if (this.state.hasError) {
-      throw new Error('I crashed!');
-    }
-    return (
-      <button className="btn-error" onClick={this.handleClick}>
-        Error
-      </button>
-    );
+
+  if (state.hasError) {
+    throw new Error('I crashed!');
   }
-}
+
+  return (
+    <button className="btn-error" onClick={handleClick}>
+      Error
+    </button>
+  );
+};

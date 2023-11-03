@@ -1,28 +1,23 @@
-import React, { ReactNode } from 'react';
-import { PageProps, PageState } from '../../type/type';
-import Content from '../Content/Content';
-import Header from '../Header/Header';
+import { useState } from 'react';
+import { Content } from '../Content/Content';
+import { Header } from '../Header/Header';
+import { PageState } from '../../type/type';
 
-export default class Page extends React.Component<PageProps, PageState> {
-  constructor(props: PageProps) {
-    super(props);
-    this.state = {
-      searchValue: null,
-    };
-  }
+export const Page = () => {
+  const [state, setState] = useState<PageState>({ searchValue: null });
 
-  handleSearchInputChange = (value: string) => {
-    this.setState({ searchValue: value });
+  const handleSearchInputChange = (value: string) => {
+    if (value !== state.searchValue) {
+      setState({ searchValue: value });
+    }
   };
 
-  render(): ReactNode {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <Header onClick={this.handleSearchInputChange} />
-          <Content data={this.state.searchValue} />
-        </div>
+        <Header onClick={handleSearchInputChange} />
+        <Content data={state.searchValue} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

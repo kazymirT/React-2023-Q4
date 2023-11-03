@@ -1,65 +1,52 @@
 import './style.css';
-import React from 'react';
-import { ComponentState, ContentProps } from '../../type/type';
-import ChildComponent from '../ChildComponent/ChildComponents';
+import { useEffect, useState } from 'react';
+import { ComponentDate, ContentProps } from '../../type/type';
+import { ChildComponent } from '../ChildComponent/ChildComponents';
 import { getDate } from '../Api/getData';
-import Loader from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
+import { Character } from 'rickmortyapi';
 
-export default class Content extends React.Component<
-  ContentProps,
-  ComponentState
-> {
-  constructor(props: ContentProps) {
-    super(props);
-    this.state = {
-      isLoader: true,
-      data: null,
-    };
-  }
+export const Content = (props: ContentProps) => {
+  const [isLoader, setIsLoader] = useState(true);
+  const [date, setData] = useState<ComponentDate>({ date: null });
 
-  componentDidUpdate(prevProps: ContentProps) {
-    if (prevProps.data !== this.props.data) {
-      this.setState({ data: null });
-      this.loadData(this.props.data);
-    }
-  }
+  useEffect(() => {
+    setIsLoader(true);
 
-  async loadData(search: string | null) {
-    this.setState({ isLoader: true });
-    if (search || typeof search === 'string') {
-      const characterData = await getDate(search);
-      if (characterData) {
-        this.setState({ isLoader: false, data: characterData });
-      } else {
-        this.setState({ isLoader: false, data: null });
+    async function loadData() {
+      if (typeof props.data === 'string') {
+        const characterDate: Character[] | undefined = await getDate(
+          props.data
+        );
+        if (characterDate) {
+          setData({ date: characterDate });
+          setIsLoader(false);
+        } else {
+          setIsLoader(false);
+          setData({ date: null });
+        }
       }
     }
-  }
 
-  render(): React.ReactNode {
-    const { data } = this.state;
-    const load = this.state.isLoader ? <Loader /> : null;
-    if (load) {
-      return load;
+    if (props.data !== null) {
+      loadData();
     }
+  }, [props.data]);
 
-    if (!data) {
-      return (
-        <div className="no-result">
-          The search returned no results, please try again.
-        </div>
-      );
-    }
-
-    return (
-      <div className="content">
-        <h2>Search results.</h2>
-        <div>
-          {data.map((e, index) => (
-            <ChildComponent key={index} data={e} />
-          ))}
-        </div>
+  return (
+    <div className="content">
+      <h2>Search results.</h2>
+      <div>
+        {isLoader ? (
+          <Loader />
+        ) : date.date ? (
+          date.date.map((e, index) => <ChildComponent key={index} data={e} />)
+        ) : (
+          <div className="no-result">
+            The search returned no results, please try again.
+          </div>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
