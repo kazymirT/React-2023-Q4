@@ -6,15 +6,19 @@ import { getLocalStorages, setLocalStorages } from '../Storage/Storage';
 export const Search = (props: SearchProps) => {
   const [state, setState] = useState<SearchState>({ value: '' });
   const { onClick } = props;
+  const [hasRunEffect, setHasRunEffect] = useState(false);
 
   useEffect(() => {
-    const search: string = getLocalStorages('search');
+    if (!hasRunEffect) {
+      const search: string = getLocalStorages('search');
 
-    if (search) {
-      onClick(search);
-      setState({ value: search });
+      if (search) {
+        onClick(search);
+        setState({ value: search });
+      }
+      setHasRunEffect(true);
     }
-  }, [onClick]);
+  }, [onClick, hasRunEffect]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ value: event.target.value });

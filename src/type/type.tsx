@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Character } from 'rickmortyapi';
 
 export type PageProps = object;
 
@@ -28,11 +27,11 @@ export type ComponentLoader = {
 };
 
 export type ComponentDate = {
-  date: Character[] | null;
+  date: ProductsType[] | null;
 };
 
 export type ChildrenContentProps = {
-  data: Character;
+  data: ProductsType;
 };
 
 export type ErrorBtnProps = {
@@ -49,4 +48,36 @@ export type ErrorBoundaryProps = {
 
 export type ErrorBoundaryState = {
   hasError: boolean;
+};
+
+export type ProductResponse = {
+  products: ProductsType[];
+  total: number;
+  skip: number;
+  limit: number;
+};
+
+export type ProductsType = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: [string, string, string];
+};
+
+export type SelectProps = {
+  selectedValue: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (newPage: number) => void;
 };
