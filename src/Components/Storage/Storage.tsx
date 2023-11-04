@@ -4,5 +4,5 @@ export const setLocalStorages = (name: string, search: string): void => {
 
 export const getLocalStorages = (name: string): string => {
   const search = localStorage.getItem(name);
-  return search ? search : ' ';
+  return search ? search : '';
 };

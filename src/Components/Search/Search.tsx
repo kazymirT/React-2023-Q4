@@ -1,4 +1,4 @@
-import './style.css';
+import { Button, Input, SearchDiv } from './style';
 import React, { useEffect, useState } from 'react';
 import { SearchProps, SearchState } from '../../type/type';
 import { getLocalStorages, setLocalStorages } from '../Storage/Storage';
@@ -12,7 +12,7 @@ export const Search = (props: SearchProps) => {
     if (!hasRunEffect) {
       const search: string = getLocalStorages('search');
 
-      if (search) {
+      if (typeof search === 'string') {
         onClick(search);
         setState({ value: search });
       }
@@ -41,14 +41,14 @@ export const Search = (props: SearchProps) => {
   };
 
   return (
-    <div className="search">
+    <SearchDiv>
       <div>
         <form onSubmit={handleOnClick} onReset={handleOnReset}>
-          <input value={state.value} onChange={handleInputChange} type="text" />
-          <button type="submit">Search</button>
-          <button type="reset">Reset</button>
+          <Input value={state.value} onChange={handleInputChange} type="text" />
+          <Button type="submit">Search</Button>
+          <Button type="reset">Reset</Button>
         </form>
       </div>
-    </div>
+    </SearchDiv>
   );
 };

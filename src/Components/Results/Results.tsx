@@ -1,4 +1,3 @@
-import './style.css';
 import { useEffect, useState } from 'react';
 import { ComponentDate, ContentProps, ProductResponse } from '../../type/type';
 import { ChildComponent } from '../ChildComponent/ChildComponents';
@@ -6,8 +5,10 @@ import { getDate } from '../Api/getData';
 import { Loader } from '../Loader/Loader';
 import { Select } from '../Select';
 import { Pagination } from '../Pagination';
+import { Items, PageControls, ResultsContainer } from './style';
+import { NoResults } from '../NoResults';
 
-export const Content = (props: ContentProps) => {
+export const Results = (props: ContentProps) => {
   const [isLoader, setIsLoader] = useState(true);
   const [date, setData] = useState<ComponentDate>({ date: null });
   const [selectedValue, setSelectedValue] = useState('10');
@@ -56,29 +57,26 @@ export const Content = (props: ContentProps) => {
   };
 
   return (
-    <div className="content">
+    <ResultsContainer hidden={props.aside}>
       {date.date && (
-        <div>
-          <Select selectedValue={selectedValue} onChange={handleChange} />
-          {date.date.map((e, index) => (
-            <ChildComponent key={index} data={e} />
-          ))}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPage}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        <>
+          <PageControls>
+            <Select selectedValue={selectedValue} onChange={handleChange} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPage}
+              onPageChange={handlePageChange}
+            />
+          </PageControls>
+
+          <Items>
+            {date.date.map((e, index) => (
+              <ChildComponent onClick={props.onClick} key={index} data={e} />
+            ))}
+          </Items>
+        </>
       )}
-      {!date.date && isLoader ? (
-        <Loader />
-      ) : (
-        !date.date && (
-          <div className="no-result">
-            The search returned no results, please try again.
-          </div>
-        )
-      )}
-    </div>
+      {!date.date && isLoader ? <Loader /> : !date.date && <NoResults />}
+    </ResultsContainer>
   );
 };

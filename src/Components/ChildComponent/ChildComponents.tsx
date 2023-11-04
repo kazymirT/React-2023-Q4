@@ -1,12 +1,12 @@
-import './style.css';
 import { ChildrenContentProps } from '../../type/type';
+import { ItemImg, ResultsItem } from './style';
 
 export const ChildComponent = (props: ChildrenContentProps) => {
   return (
-    <div className="content-item">
-      <img src={props.data.images[0]} alt={props.data.title} />
+    <ResultsItem onClick={props.onClick}>
+      <ItemImg src={props.data.images[0]} alt={props.data.title} />
       <h2>{props.data.title}</h2>
       <p></p>
-    </div>
+    </ResultsItem>
   );
 };

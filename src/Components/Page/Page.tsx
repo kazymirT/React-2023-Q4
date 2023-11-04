@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Content } from '../Content/Content';
+import { Content } from '../Content';
 import { Header } from '../Header/Header';
 import { PageState } from '../../type/type';
 

@@ -20,6 +20,12 @@ export type SearchState = {
 
 export type ContentProps = {
   data: string | null;
+  aside: boolean;
+  onClick: () => void;
+};
+
+export type DetailsProps = {
+  aside: boolean;
 };
 
 export type ComponentLoader = {
@@ -32,6 +38,7 @@ export type ComponentDate = {
 
 export type ChildrenContentProps = {
   data: ProductsType;
+  onClick: () => void;
 };
 
 export type ErrorBtnProps = {
