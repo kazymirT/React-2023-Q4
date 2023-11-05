@@ -7,8 +7,11 @@ import { Select } from '../Select';
 import { Pagination } from '../Pagination';
 import { Items, PageControls, ResultsContainer } from './style';
 import { NoResults } from '../NoResults';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Results = (props: ResultsProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isLoader, setIsLoader] = useState(true);
   const [date, setData] = useState<ComponentDate>({ date: null });
   const [selectedValue, setSelectedValue] = useState('10');
@@ -18,7 +21,6 @@ export const Results = (props: ResultsProps) => {
 
   useEffect(() => {
     setIsLoader(true);
-
     async function loadData() {
       if (typeof props.data === 'string') {
         const productResponse: ProductResponse | null = await getDate(
@@ -30,6 +32,13 @@ export const Results = (props: ResultsProps) => {
           setData({ date: productResponse.products });
           setProductTotal(productResponse.total);
           setIsLoader(false);
+          const queryParamsSearch = new URLSearchParams(location.search).get(
+            'search'
+          );
+          const newQueryParams = `search=${
+            queryParamsSearch ? queryParamsSearch : ''
+          }&page=${currentPage}`;
+          navigate(`?${newQueryParams}`);
         } else {
           setIsLoader(false);
           setData({ date: null });
@@ -40,18 +49,17 @@ export const Results = (props: ResultsProps) => {
     if (props.data !== null) {
       loadData();
     }
-  }, [currentPage, props.data, selectedValue]);
+  }, [currentPage, location.search, navigate, props.data, selectedValue]);
 
   useEffect(() => {
     const total = productsTotal / Number(selectedValue);
-    setTotalPage(total);
+    setTotalPage(total < 1 ? 1 : total);
   }, [productsTotal, selectedValue, setProductTotal, setSelectedValue]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
     setCurrentPage(1);
   };
-
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };

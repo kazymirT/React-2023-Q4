@@ -29,7 +29,7 @@ export const Search = (props: SearchProps) => {
     const queryParams = new URLSearchParams(location.search).get('search');
     if (search !== queryParams && typeof queryParams === 'string') {
       setState({ value: queryParams });
-      navigate(`?search=${queryParams}`);
+      navigate(`?search=${queryParams}&page=1`);
       onClick(queryParams);
       setLocalStorages('search', queryParams);
     }
@@ -40,7 +40,7 @@ export const Search = (props: SearchProps) => {
   };
 
   const handleCommonAction = (value: string) => {
-    navigate(`?search=${value}`);
+    navigate(`?search=${value}&page=1`);
     onClick(value);
     setLocalStorages('search', value);
   };
