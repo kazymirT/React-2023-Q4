@@ -1,5 +1,5 @@
 {
-  "name": "components",
+  "name": "react-component",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +14,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rickmortyapi": "^2.3.0",
+    "react-router-dom": "^6.18.0",
+    "react-router-use-history": "^1.1.0",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {

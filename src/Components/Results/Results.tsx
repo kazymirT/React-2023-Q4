@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ComponentDate, ContentProps, ProductResponse } from '../../type/type';
+import { ComponentDate, ProductResponse, ResultsProps } from '../../type/type';
 import { ChildComponent } from '../ChildComponent/ChildComponents';
 import { getDate } from '../Api/getData';
 import { Loader } from '../Loader/Loader';
@@ -8,7 +8,7 @@ import { Pagination } from '../Pagination';
 import { Items, PageControls, ResultsContainer } from './style';
 import { NoResults } from '../NoResults';
 
-export const Results = (props: ContentProps) => {
+export const Results = (props: ResultsProps) => {
   const [isLoader, setIsLoader] = useState(true);
   const [date, setData] = useState<ComponentDate>({ date: null });
   const [selectedValue, setSelectedValue] = useState('10');

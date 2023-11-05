@@ -20,6 +20,10 @@ export type SearchState = {
 
 export type ContentProps = {
   data: string | null;
+};
+
+export type ResultsProps = {
+  data: string | null;
   aside: boolean;
   onClick: () => void;
 };
