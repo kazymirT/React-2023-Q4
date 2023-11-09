@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-type ResultsContainerProps = {
-  hidden: boolean;
-};
-export const ResultsContainer = styled.div<ResultsContainerProps>`
+// type ResultsContainerProps = {
+//   hidden: boolean;
+// };
+export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.hidden ? '50%' : '100%')};
+  width: 100%;
 `;
 export const PageControls = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin-bottom: 10px;
 `;
 

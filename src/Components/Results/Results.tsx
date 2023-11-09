@@ -1,90 +1,32 @@
-import { useEffect, useState } from 'react';
-import { ComponentDate, ProductResponse, ResultsProps } from '../../type/type';
 import { ChildComponent } from '../ChildComponent/ChildComponents';
-import { getDate } from '../Api/getData';
-import { Loader } from '../Loader/Loader';
-import { Select } from '../Select';
-import { Pagination } from '../Pagination';
+import { Select } from '../Select/Select';
+import { Pagination } from '../Pagination/Pagination';
 import { Items, PageControls, ResultsContainer } from './style';
+import { useLoaderData } from 'react-router-dom';
 import { NoResults } from '../NoResults';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { ResultsLoader } from '../../type/type';
 
-export const Results = (props: ResultsProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isLoader, setIsLoader] = useState(true);
-  const [date, setData] = useState<ComponentDate>({ date: null });
-  const [selectedValue, setSelectedValue] = useState('10');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsTotal, setProductTotal] = useState(0);
-  const [totalPage, setTotalPage] = useState(0);
-
-  useEffect(() => {
-    setIsLoader(true);
-    async function loadData() {
-      if (typeof props.data === 'string') {
-        const productResponse: ProductResponse | null = await getDate(
-          props.data,
-          selectedValue,
-          currentPage
-        );
-        if (productResponse && productResponse.products.length > 0) {
-          setData({ date: productResponse.products });
-          setProductTotal(productResponse.total);
-          setIsLoader(false);
-          const queryParamsSearch = new URLSearchParams(location.search).get(
-            'search'
-          );
-          const newQueryParams = `search=${
-            queryParamsSearch ? queryParamsSearch : ''
-          }&page=${currentPage}`;
-          navigate(`?${newQueryParams}`);
-        } else {
-          setIsLoader(false);
-          setData({ date: null });
-        }
-      }
-    }
-
-    if (props.data !== null) {
-      loadData();
-    }
-  }, [currentPage, location.search, navigate, props.data, selectedValue]);
-
-  useEffect(() => {
-    const total = productsTotal / Number(selectedValue);
-    setTotalPage(total < 1 ? 1 : total);
-  }, [productsTotal, selectedValue, setProductTotal, setSelectedValue]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
-    setCurrentPage(1);
-  };
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+export const Results = () => {
+  const { data } = useLoaderData() as ResultsLoader;
 
   return (
-    <ResultsContainer hidden={props.aside}>
-      {date.date && (
+    <ResultsContainer>
+      {data.products.length ? (
         <>
           <PageControls>
-            <Select selectedValue={selectedValue} onChange={handleChange} />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPage}
-              onPageChange={handlePageChange}
-            />
+            <Select />
+            <Pagination />
           </PageControls>
 
-          <Items>
-            {date.date.map((e, index) => (
-              <ChildComponent onClick={props.onClick} key={index} data={e} />
+          <Items id="left-page">
+            {data.products.map((e, index) => (
+              <ChildComponent key={index} data={e} />
             ))}
           </Items>
         </>
+      ) : (
+        <NoResults />
       )}
-      {!date.date && isLoader ? <Loader /> : !date.date && <NoResults />}
     </ResultsContainer>
   );
 };

@@ -1,37 +1,5 @@
 import { ReactNode } from 'react';
 
-export type PageProps = object;
-
-export type PageState = {
-  searchValue: string | null;
-};
-
-export type HeaderProps = {
-  onClick: (value: string) => void;
-};
-
-export type SearchProps = {
-  onClick: (value: string) => void;
-};
-
-export type SearchState = {
-  value: string;
-};
-
-export type ContentProps = {
-  data: string | null;
-};
-
-export type ResultsProps = {
-  data: string | null;
-  aside: boolean;
-  onClick: () => void;
-};
-
-export type DetailsProps = {
-  aside: boolean;
-};
-
 export type ComponentLoader = {
   isLoader: boolean;
 };
@@ -42,7 +10,6 @@ export type ComponentDate = {
 
 export type ChildrenContentProps = {
   data: ProductsType;
-  onClick: () => void;
 };
 
 export type ErrorBtnProps = {
@@ -91,4 +58,28 @@ export type PaginationProps = {
   currentPage: number;
   totalPages: number;
   onPageChange: (newPage: number) => void;
+};
+
+export type PageLoader = {
+  url: URL;
+};
+
+export type DetailsLoader = {
+  data: ProductsType;
+  search: string;
+  url: URL;
+};
+
+export type HeaderLoader = {
+  searchName: string;
+  search: string;
+};
+
+export type ResultsLoader = {
+  data: {
+    skip: string;
+    products: ProductsType[];
+    total: string;
+    limit: string;
+  };
 };
