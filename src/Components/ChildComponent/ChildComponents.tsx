@@ -1,6 +1,8 @@
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ChildrenContentProps } from '../../type/type';
 import { ItemImg, ResultsItem, ItemTitle } from './style';
+import { useContext } from 'react';
+import { MyContext } from '../../Context/MyContext';
 
 type ChildComponentLoader = {
   search: string;
@@ -8,7 +10,7 @@ type ChildComponentLoader = {
 };
 
 export const ChildComponent = (props: ChildrenContentProps) => {
-  const { url } = useLoaderData() as ChildComponentLoader;
+  const { url } = useContext(MyContext) as ChildComponentLoader;
 
   return (
     <NavLink

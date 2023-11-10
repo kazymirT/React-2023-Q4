@@ -30,9 +30,9 @@ export type ErrorBoundaryState = {
 
 export type ProductResponse = {
   products: ProductsType[];
-  total: number;
-  skip: number;
-  limit: number;
+  total: string;
+  skip: string;
+  limit: string;
 };
 
 export type ProductsType = {
@@ -62,6 +62,9 @@ export type PaginationProps = {
 
 export type PageLoader = {
   url: URL;
+  data: ProductResponse;
+  search: string;
+  searchName: string;
 };
 
 export type DetailsLoader = {

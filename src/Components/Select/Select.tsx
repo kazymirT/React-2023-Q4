@@ -1,6 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
 import { ProductsType } from '../../type/type';
 import { useHistory } from 'react-router-use-history';
+import { useContext } from 'react';
+import { MyContext } from '../../Context/MyContext';
 
 type ResultsLoader = {
   data: {
@@ -15,7 +16,7 @@ type ResultsLoader = {
 
 export const Select = () => {
   const history = useHistory();
-  const { url } = useLoaderData() as ResultsLoader;
+  const { url } = useContext(MyContext) as ResultsLoader;
   const limit = url.searchParams.get('limit') || '';
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

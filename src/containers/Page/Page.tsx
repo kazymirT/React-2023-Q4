@@ -17,6 +17,7 @@ import { getDate } from '../../Components/Api/getData';
 import { PageLoader, ProductResponse } from '../../type/type';
 import { MouseEventHandler } from 'react';
 import { useHistory } from 'react-router-use-history';
+import { MyContextProvider } from '../../Context/MyContext';
 
 export async function loader(params: LoaderFunctionArgs<unknown>) {
   const searchName = getLocalStorages('search');
@@ -41,7 +42,7 @@ export async function loader(params: LoaderFunctionArgs<unknown>) {
 export const Page = () => {
   const navigation = useNavigation();
   const history = useHistory();
-  const { url } = useLoaderData() as PageLoader;
+  const { url, data, search, searchName } = useLoaderData() as PageLoader;
 
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     const targetElement = event.target as HTMLElement;
@@ -54,12 +55,14 @@ export const Page = () => {
 
   return (
     <>
-      <Header />
-      <ContentContainer onClick={handleClick}>
-        <Content />
-        {navigation.state === 'loading' ? <Loader /> : ''}
-        <Outlet />
-      </ContentContainer>
+      <MyContextProvider value={{ url, data, search, searchName }}>
+        <Header />
+        <ContentContainer onClick={handleClick}>
+          <Content />
+          {navigation.state === 'loading' ? <Loader /> : ''}
+          <Outlet />
+        </ContentContainer>
+      </MyContextProvider>
     </>
   );
 };

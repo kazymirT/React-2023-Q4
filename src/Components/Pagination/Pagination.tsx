@@ -1,6 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
 import { useHistory } from 'react-router-use-history';
 import { ProductsType } from '../../type/type';
+import { useContext } from 'react';
+import { MyContext } from '../../Context/MyContext';
 
 type PaginationLoader = {
   url: URL;
@@ -14,7 +15,7 @@ type PaginationLoader = {
 
 export const Pagination = () => {
   const history = useHistory();
-  const { url, data } = useLoaderData() as PaginationLoader;
+  const { url, data } = useContext(MyContext) as PaginationLoader;
   const totalPages: number = Math.ceil(Number(data.total) / Number(data.limit));
   const currentPage: number = Number(data.skip) / Number(data.limit) + 1;
 
