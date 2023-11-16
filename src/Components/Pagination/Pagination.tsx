@@ -1,27 +1,22 @@
 import { useHistory } from 'react-router-use-history';
-import { ProductsType } from '../../type/type';
-import { useContext } from 'react';
-import { MyContext } from '../../Context/MyContext';
-
-type PaginationLoader = {
-  url: URL;
-  data: {
-    skip: string;
-    products: ProductsType[];
-    total: string;
-    limit: string;
-  };
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../Store/store';
+import { updatePage } from '../../Slice/fetchArgSlice';
 
 export const Pagination = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const { url, data } = useContext(MyContext) as PaginationLoader;
-  const totalPages: number = Math.ceil(Number(data.total) / Number(data.limit));
-  const currentPage: number = Number(data.skip) / Number(data.limit) + 1;
+  const { limit, page, total } = useSelector(
+    (state: RootState) => state.fetchArg
+  );
+  const skip: number = (Number(page) - 1) * Number(limit);
+  const totalPages: number = Math.ceil(Number(total) / Number(limit));
+  const currentPage: number = Number(skip) / Number(limit) + 1;
 
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      const newUrl = new URL(url.toString());
+      dispatch(updatePage({ page: String(newPage) }));
+      const newUrl = new URL(location.toString());
       newUrl.searchParams.set('page', `${newPage}`);
       history.push(newUrl.search);
     }

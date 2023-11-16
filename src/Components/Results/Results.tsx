@@ -1,18 +1,36 @@
 import { ChildComponent } from '../ChildComponent/ChildComponents';
-import { Select } from '../Select/Select';
-import { Pagination } from '../Pagination/Pagination';
 import { Items, PageControls, ResultsContainer } from './style';
 import { NoResults } from '../NoResults';
-import { ResultsLoader } from '../../type/type';
-import { useContext } from 'react';
-import { MyContext } from '../../Context/MyContext';
+import { Loader } from '../Loader/Loader';
+import { useGetProductsByNameQuery } from '../Api/getData';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../Store/store';
+import { updateTotal } from '../../Slice/fetchArgSlice';
+import { Select } from '../Select/Select';
+import { Pagination } from '../Pagination/Pagination';
+import { useEffect } from 'react';
 
 export const Results = () => {
-  const { data } = useContext(MyContext) as ResultsLoader;
+  const dispatch = useDispatch();
+  const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  const { limit, page } = useSelector((state: RootState) => state.fetchArg);
+  const skip: number = (Number(page) - 1) * Number(limit);
+  const { data, isFetching } = useGetProductsByNameQuery({
+    name: searchValue,
+    limit: limit,
+    page: String(skip),
+  });
+
+  useEffect(() => {
+    if (data && data.total) {
+      dispatch(updateTotal({ total: data.total }));
+    }
+  }, [data, dispatch]);
 
   return (
     <ResultsContainer>
-      {data.products.length ? (
+      {isFetching && <Loader />}
+      {data?.products.length ? (
         <>
           <PageControls>
             <Select />
@@ -20,8 +38,8 @@ export const Results = () => {
           </PageControls>
 
           <Items id="left-page">
-            {data.products.map((e, index) => (
-              <ChildComponent key={index} data={e} />
+            {data.products.map((e) => (
+              <ChildComponent key={e.id} data={e} />
             ))}
           </Items>
         </>

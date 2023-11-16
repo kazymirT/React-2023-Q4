@@ -1,30 +1,24 @@
-export const getDate = async (
-  search: string,
-  limitSearch?: string,
-  currentPage?: string
-) => {
-  try {
-    const searchName = search ? search : ' ';
-    const limit = limitSearch ? limitSearch : 5;
-    const skip = currentPage ? Number(limit) * (Number(currentPage) - 1) : 0;
-    const response = await fetch(
-      `https://dummyjson.com/products/search?q=${searchName}&limit=${limit}&skip=${skip}`
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ProductResponse, ProductsType } from '../../type/type';
+
+type FetchArgType = {
+  name: string;
+  limit: string;
+  page: string;
 };
 
-export const getProduct = async (productId: string) => {
-  try {
-    const response = await fetch(`https://dummyjson.com/products/${productId}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+export const getProducts = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+  endpoints: (build) => ({
+    getProductsByName: build.query<ProductResponse, FetchArgType>({
+      query: (fetchArg) =>
+        `products/search?q=${fetchArg.name}&limit=${fetchArg.limit}&skip=${fetchArg.page}`,
+    }),
+    getProductById: build.query<ProductsType, string>({
+      query: (productId) => `products/${productId}`,
+    }),
+  }),
+});
+
+export const { useGetProductsByNameQuery, useGetProductByIdQuery } =
+  getProducts;

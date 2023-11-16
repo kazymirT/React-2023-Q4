@@ -1,29 +1,20 @@
-import { ProductsType } from '../../type/type';
 import { useHistory } from 'react-router-use-history';
-import { useContext } from 'react';
-import { MyContext } from '../../Context/MyContext';
-
-type ResultsLoader = {
-  data: {
-    skip: string;
-    products: ProductsType[];
-    total: string;
-    limit: string;
-  };
-  search: string;
-  url: URL;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../Store/store';
+import { updateLimit, updatePage } from '../../Slice/fetchArgSlice';
 
 export const Select = () => {
   const history = useHistory();
-  const { url } = useContext(MyContext) as ResultsLoader;
-  const limit = url.searchParams.get('limit') || '';
+  const dispatch = useDispatch();
+  const { limit } = useSelector((state: RootState) => state.fetchArg);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
     if (newLimit !== limit) {
-      const newUrl = new URL(url.toString());
+      dispatch(updatePage({ page: '1' }));
+      dispatch(updateLimit({ limit: newLimit }));
+      const newUrl = new URL(location.toString());
       newUrl.searchParams.set('limit', newLimit);
       newUrl.searchParams.set('page', `1`);
       history.push(newUrl.search);
