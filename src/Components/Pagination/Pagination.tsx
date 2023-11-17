@@ -13,31 +13,35 @@ export const Pagination = () => {
   const totalPages: number = Math.ceil(Number(total) / Number(limit));
   const currentPage: number = Number(skip) / Number(limit) + 1;
 
+  const updateUrlPage = (newPage: number) => {
+    const newUrl = new URL(location.toString());
+    newUrl.searchParams.set('page', `${newPage}`);
+    history.push(newUrl.search);
+  };
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       dispatch(updatePage({ page: String(newPage) }));
-      const newUrl = new URL(location.toString());
-      newUrl.searchParams.set('page', `${newPage}`);
-      history.push(newUrl.search);
+      updateUrlPage(newPage);
     }
+  };
+  const handlePrevPage = () => {
+    handlePageChange(currentPage - 1);
+  };
+  const handleNextPage = () => {
+    handlePageChange(currentPage + 1);
   };
 
   return (
     <div className="pagination">
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        {'<'}
+      <button onClick={handlePrevPage} disabled={currentPage === 1}>
+        &#8656;
       </button>
       <span>
         {currentPage}/{totalPages}
       </span>
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        {'>'}
+      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        &#8658;
       </button>
     </div>
   );

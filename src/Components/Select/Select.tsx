@@ -8,16 +8,20 @@ export const Select = () => {
   const dispatch = useDispatch();
   const { limit } = useSelector((state: RootState) => state.fetchArg);
 
+  const updateUrlParams = (newLimit: string, newPage: string) => {
+    const newUrl = new URL(location.toString());
+    newUrl.searchParams.set('limit', newLimit);
+    newUrl.searchParams.set('page', newPage);
+    history.push(newUrl.search);
+  };
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
     if (newLimit !== limit) {
       dispatch(updatePage({ page: '1' }));
       dispatch(updateLimit({ limit: newLimit }));
-      const newUrl = new URL(location.toString());
-      newUrl.searchParams.set('limit', newLimit);
-      newUrl.searchParams.set('page', `1`);
-      history.push(newUrl.search);
+      updateUrlParams(newLimit, '1');
     }
   };
 

@@ -57,3 +57,36 @@
     transform: translate(-50%, 10%);
   }
 }
+
+/* loader-details */
+.loader-details_container{
+  width: 390px;
+  height: 525px;
+}
+.loader-details {
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #FF3D00;
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+.loader-details:before,
+.loader-details:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+  background: #fff;
+  transform: rotate(0deg) translate(30px);
+  animation: rotate 1s ease infinite;
+}
+.loader-details:after {
+  animation-delay: 0.5s
+}
+@keyframes rotate {
+  100% {transform: rotate(360deg) translate(30px)
+  }
+}

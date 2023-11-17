@@ -1,4 +1,3 @@
-import { Form } from 'react-router-dom';
 import { Button, Input, SearchDiv } from './style';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +24,7 @@ export const Search = () => {
   return (
     <SearchDiv>
       <div>
-        <Form role="search" onSubmit={handlerSubmit}>
+        <form role="search" onSubmit={handlerSubmit}>
           <Input
             type="text"
             name="search"
@@ -36,7 +35,7 @@ export const Search = () => {
             }}
           />
           <Button type="submit">Search</Button>
-        </Form>
+        </form>
       </div>
     </SearchDiv>
   );
