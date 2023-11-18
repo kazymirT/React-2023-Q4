@@ -9,6 +9,7 @@ import { Pagination } from '../Pagination/Pagination';
 import { useHistory } from 'react-router-use-history';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLimit, updatePage } from '../../Slice/fetchArgSlice';
+
 export const Results = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,19 +23,28 @@ export const Results = () => {
     page: String(skip),
   });
 
-  const updateUrlParams = (newLimit: string, newPage: string) => {
+  const updateUrlParams = (newPage: string, newLimit?: string) => {
     const newUrl = new URL(location.toString());
-    newUrl.searchParams.set('limit', newLimit);
+    if (newLimit) {
+      newUrl.searchParams.set('limit', newLimit);
+    }
     newUrl.searchParams.set('page', newPage);
     history.push(newUrl.search);
   };
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
     if (newLimit !== limit) {
       dispatch(updatePage({ page: '1' }));
       dispatch(updateLimit({ limit: newLimit }));
-      updateUrlParams(newLimit, '1');
+      updateUrlParams('1', newLimit);
+    }
+  };
+  const handlePageChange = (newPage: number, totalPages: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(updatePage({ page: String(newPage) }));
+      updateUrlParams(String(newPage));
     }
   };
   return (
@@ -45,7 +55,12 @@ export const Results = () => {
         <>
           <PageControls>
             <Select limit={limit} onChange={handleSelectChange} />
-            <Pagination />
+            <Pagination
+              limit={data.limit}
+              page={page}
+              total={data.total}
+              onChange={handlePageChange}
+            />
           </PageControls>
 
           <Items id="left-page">
