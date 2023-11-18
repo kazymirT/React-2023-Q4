@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/48</span>
+                <span class='fraction'>3/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/48</span>
+                <span class='fraction'>3/30</span>
             </div>
         
             
@@ -93,28 +93,7 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -144,53 +123,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useHistory } from 'react-router-use-history';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../Store/store';
-import { updatePage } from '../../Slice/fetchArgSlice';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { PaginationPropsType } from '../../type/type';
 &nbsp;
-export const Pagination = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const dispatch = useDispatch();</span>
-<span class="cstat-no" title="statement not covered" >  const history = useHistory();</span>
-<span class="cstat-no" title="statement not covered" >  const { limit, page, total } = useSelector(</span>
-<span class="cstat-no" title="statement not covered" >    (state: RootState) =&gt; state.fetchArg</span>
+export const Pagination = <span class="fstat-no" title="function not covered" >(props: PaginationPropsType) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const skip: number = (Number(props.page) - 1) * Number(props.limit);</span>
+<span class="cstat-no" title="statement not covered" >  const totalPages: number = Math.ceil(</span>
+<span class="cstat-no" title="statement not covered" >    Number(props.total) / Number(props.limit)</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" >  const skip: number = (Number(page) - 1) * Number(limit);</span>
-<span class="cstat-no" title="statement not covered" >  const totalPages: number = Math.ceil(Number(total) / Number(limit));</span>
-<span class="cstat-no" title="statement not covered" >  const currentPage: number = Number(skip) / Number(limit) + 1;</span>
+<span class="cstat-no" title="statement not covered" >  const currentPage: number = Number(skip) / Number(props.limit) + 1;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const updateUrlPage = (newPage: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const newUrl = new URL(location.toString());</span>
-<span class="cstat-no" title="statement not covered" >    newUrl.searchParams.set('page', `${newPage}`);</span>
-<span class="cstat-no" title="statement not covered" >    history.push(newUrl.search);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const handlePageChange = (newPage: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (newPage &gt;= 1 &amp;&amp; newPage &lt;= totalPages) {</span>
-<span class="cstat-no" title="statement not covered" >      dispatch(updatePage({ page: String(newPage) }));</span>
-<span class="cstat-no" title="statement not covered" >      updateUrlPage(newPage);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >  const handlePrevPage = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    handlePageChange(currentPage - 1);</span>
+<span class="cstat-no" title="statement not covered" >    props.onChange(currentPage - 1, totalPages);</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >  const handleNextPage = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    handlePageChange(currentPage + 1);</span>
+<span class="cstat-no" title="statement not covered" >    props.onChange(currentPage + 1, totalPages);</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
@@ -214,7 +160,7 @@ export const Pagination = <span class="fstat-no" title="function not covered" >(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-18T12:47:51.727Z
+                at 2023-11-18T18:02:33.711Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

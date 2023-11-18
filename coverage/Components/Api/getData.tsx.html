@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">75.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/57</span>
+                <span class='fraction'>43/57</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">75.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/57</span>
+                <span class='fraction'>43/57</span>
             </div>
         
             
@@ -140,22 +140,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -163,16 +151,28 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -198,21 +198,21 @@ export const getProducts = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
   endpoints: (build) =&gt; ({
     getProductsByName: build.query&lt;ProductResponse, FetchArgType&gt;({
-      query: <span class="fstat-no" title="function not covered" >(fetchArg) =&gt;</span>
-<span class="cstat-no" title="statement not covered" >        `products/search?q=${fetchArg.name}&amp;limit=${fetchArg.limit}&amp;skip=${fetchArg.page}`,</span>
-<span class="fstat-no" title="function not covered" >      async onQueryStarted(_, { dispatch, queryFulfilled }) {</span>
-<span class="cstat-no" title="statement not covered" >        dispatch(setIsMainLoading(true));</span>
-<span class="cstat-no" title="statement not covered" >        dispatch(setIsMainError(false));</span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >          const { data } = await queryFulfilled;</span>
+      query: (fetchArg) =&gt;
+        `products/search?q=${fetchArg.name}&amp;limit=${fetchArg.limit}&amp;skip=${fetchArg.page}`,
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsMainLoading(true));
+        dispatch(setIsMainError(false));
+        try {
+          const { data } = await <span class="branch-0 cbranch-no" title="branch not covered" >queryFulfilled;</span>
 <span class="cstat-no" title="statement not covered" >          dispatch(setMainData(data));</span>
 <span class="cstat-no" title="statement not covered" >          dispatch(updateTotal({ total: data.total }));</span>
 <span class="cstat-no" title="statement not covered" >          dispatch(setIsMainLoading(false));</span>
-<span class="cstat-no" title="statement not covered" >        } catch (err) {</span>
-<span class="cstat-no" title="statement not covered" >          dispatch(setIsMainError(true));</span>
-<span class="cstat-no" title="statement not covered" >          dispatch(setIsMainLoading(false));</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      },</span>
+        } catch (err) {
+          dispatch(setIsMainError(true));
+          dispatch(setIsMainLoading(false));
+        }
+      },
     }),
     getProductById: build.query&lt;ProductsType, string&gt;({
       query: <span class="fstat-no" title="function not covered" >(productId) =&gt; `products/${productId}`,</span>
@@ -241,7 +241,7 @@ export const { useGetProductsByNameQuery, useGetProductByIdQuery } =
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-18T12:47:51.727Z
+                at 2023-11-18T18:02:33.711Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

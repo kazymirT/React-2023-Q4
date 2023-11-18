@@ -7,16 +7,22 @@ import { ErrorPage } from '../../containers/PageError/PageError';
 import { Provider } from 'react-redux';
 import { store } from '../../Store/store';
 
+export const AppRouter = () => {
+  return (
+    <Routes>
+      <Route path={'/'} element={<Page />} errorElement={<ErrorPage />}>
+        <Route path="details/:detailsId" element={<Details />} />
+      </Route>
+      <Route path="*" element={<Page404 />}></Route>
+    </Routes>
+  );
+};
+
 export const App = () => {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-        <Routes>
-          <Route path={'/'} element={<Page />} errorElement={<ErrorPage />}>
-            <Route path="details/:detailsId" element={<Details />} />
-          </Route>
-          <Route path="*" element={<Page404 />}></Route>
-        </Routes>
+        <AppRouter />
       </ErrorBoundary>
     </Provider>
   );

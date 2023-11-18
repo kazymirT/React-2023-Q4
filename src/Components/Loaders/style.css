@@ -59,7 +59,7 @@
 }
 
 /* loader-details */
-.loader-details_container{
+.loader-details_container {
   width: 390px;
   height: 525px;
 }
@@ -68,14 +68,14 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #FF3D00;
+  background: #ff3d00;
   position: relative;
   top: 50%;
   left: 50%;
 }
 .loader-details:before,
 .loader-details:after {
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 50%;
   inset: 0;
@@ -84,9 +84,10 @@
   animation: rotate 1s ease infinite;
 }
 .loader-details:after {
-  animation-delay: 0.5s
+  animation-delay: 0.5s;
 }
 @keyframes rotate {
-  100% {transform: rotate(360deg) translate(30px)
+  100% {
+    transform: rotate(360deg) translate(30px);
   }
 }

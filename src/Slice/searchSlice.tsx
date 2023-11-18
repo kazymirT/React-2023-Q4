@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getLocalStorages } from '../Components/Storage/Storage';
 
-const initialState = {
-  searchValue:
+export const getInitialSearchValue = () => {
+  return (
     new URLSearchParams(location.search).get('search') ||
     getLocalStorages('search') ||
-    '',
+    ''
+  );
+};
+
+const initialState = {
+  searchValue: getInitialSearchValue(),
 };
 
 export const searchValueSlice = createSlice({
