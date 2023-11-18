@@ -50,7 +50,9 @@ export const Search = () => {
               setQuery(e.target.value);
             }}
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit" id="search-button">
+            Search
+          </Button>
         </form>
       </div>
     </SearchDiv>

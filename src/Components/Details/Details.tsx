@@ -12,14 +12,14 @@ import { LoaderDetails } from '../Loaders/LoaderDetails';
 export const Details = () => {
   const params = useParams();
   const detailsId = params.detailsId;
-  const { data, isFetching, isLoading } = useGetProductByIdQuery(
+  const { data, isFetching } = useGetProductByIdQuery(
     detailsId ? detailsId : ''
   );
 
   return (
     <DetailsContainer>
-      {(isFetching || isLoading) && <LoaderDetails />}
-      {data && !isFetching && !isLoading && (
+      {isFetching && <LoaderDetails />}
+      {data && !isFetching && (
         <DetailsItem>
           <ProductImages src={data.images[0]} alt={data.title} />
           <DetailsTitle>{data.title}</DetailsTitle>
@@ -34,7 +34,7 @@ export const Details = () => {
       <NavLink to={`/${location.search}`} className={'details-cancel'}>
         Cancel
       </NavLink>
-      {!data && !isFetching && !isLoading && <div>No Result</div>}
+      {!data && !isFetching && <div>No Result</div>}
     </DetailsContainer>
   );
 };
