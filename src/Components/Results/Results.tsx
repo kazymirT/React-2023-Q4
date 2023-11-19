@@ -13,11 +13,12 @@ import { updateLimit, updatePage } from '../../Slice/fetchArgSlice';
 export const Results = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { isMainLoading } = useSelector((state: RootState) => state.isLoading);
   const { searchValue } = useSelector((state: RootState) => state.searchValue);
   const { limit, page } = useSelector((state: RootState) => state.fetchArg);
   const skip: number = (Number(page) - 1) * Number(limit);
 
-  const { data, isFetching } = useGetProductsByNameQuery({
+  const { data } = useGetProductsByNameQuery({
     name: searchValue,
     limit: limit,
     page: String(skip),
@@ -49,7 +50,7 @@ export const Results = () => {
   };
   return (
     <ResultsContainer>
-      {isFetching && <Loader />}
+      {isMainLoading && <Loader />}
 
       {data && data.products.length > 0 && (
         <>
@@ -71,7 +72,7 @@ export const Results = () => {
         </>
       )}
 
-      {!isFetching && data?.products.length === 0 && <NoResults />}
+      {!isMainLoading && data?.products.length === 0 && <NoResults />}
     </ResultsContainer>
   );
 };

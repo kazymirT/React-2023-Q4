@@ -8,18 +8,21 @@ import {
 import { useGetProductByIdQuery } from '../Api/getData';
 import { useParams } from 'react-router-dom';
 import { LoaderDetails } from '../Loaders/LoaderDetails';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Store/store';
 
 export const Details = () => {
   const params = useParams();
   const detailsId = params.detailsId;
-  const { data, isFetching } = useGetProductByIdQuery(
-    detailsId ? detailsId : ''
+  const { isDetailsLoading } = useSelector(
+    (state: RootState) => state.isLoading
   );
+  const { data } = useGetProductByIdQuery(detailsId ? detailsId : '');
 
   return (
     <DetailsContainer>
-      {isFetching && <LoaderDetails />}
-      {data && !isFetching && (
+      {isDetailsLoading && <LoaderDetails />}
+      {data && !isDetailsLoading && (
         <DetailsItem>
           <ProductImages src={data.images[0]} alt={data.title} />
           <DetailsTitle>{data.title}</DetailsTitle>
@@ -31,10 +34,14 @@ export const Details = () => {
           <p>{data.description}</p>
         </DetailsItem>
       )}
-      <NavLink to={`/${location.search}`} className={'details-cancel'}>
+      <NavLink
+        to={`/${location.search}`}
+        data-testid="details-cancel"
+        className={'details-cancel'}
+      >
         Cancel
       </NavLink>
-      {!data && !isFetching && <div>No Result</div>}
+      {!data && isDetailsLoading && <div>No Result</div>}
     </DetailsContainer>
   );
 };

@@ -29,6 +29,7 @@ export const Page = () => {
   if (limitUrl && limitUrl !== limit) {
     dispatch(setSearchValue(limitUrl));
   }
+
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     const targetElement = event.target as HTMLElement;
 

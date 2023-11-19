@@ -18,7 +18,7 @@ export const Pagination = (props: PaginationPropsType) => {
     <div className="pagination">
       <button
         onClick={handlePrevPage}
-        data-testId="btn-prev"
+        data-testid="btn-prev"
         disabled={currentPage === 1}
       >
         &#8656;
@@ -28,7 +28,7 @@ export const Pagination = (props: PaginationPropsType) => {
       </span>
       <button
         onClick={handleNextPage}
-        data-testId="btn-next"
+        data-testid="btn-next"
         disabled={currentPage === totalPages}
       >
         &#8658;
