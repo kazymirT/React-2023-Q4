@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/40</span>
+                <span class='fraction'>30/40</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">20% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/40</span>
+                <span class='fraction'>30/40</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,6 +115,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -125,24 +135,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NavLink } from 'react-router-dom';
 import {
   DetailsContainer,
@@ -154,17 +154,17 @@ import { useGetProductByIdQuery } from '../Api/getData';
 import { useParams } from 'react-router-dom';
 import { LoaderDetails } from '../Loaders/LoaderDetails';
 &nbsp;
-export const Details = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const params = useParams();</span>
-<span class="cstat-no" title="statement not covered" >  const detailsId = params.detailsId;</span>
-<span class="cstat-no" title="statement not covered" >  const { data, isFetching } = useGetProductByIdQuery(</span>
-<span class="cstat-no" title="statement not covered" >    detailsId ? detailsId : ''</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;DetailsContainer&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {isFetching &amp;&amp; &lt;LoaderDetails /&gt;}</span>
-<span class="cstat-no" title="statement not covered" >      {data &amp;&amp; !isFetching &amp;&amp; (</span>
+export const Details = () =&gt; {
+  const params = useParams();
+  const detailsId = params.detailsId;
+  const { data, isFetching } = useGetProductByIdQuery(
+    detailsId ? <span class="branch-0 cbranch-no" title="branch not covered" >detailsId : ''</span>
+  );
+&nbsp;
+  return (
+    &lt;DetailsContainer&gt;
+      {isFetching &amp;&amp; &lt;LoaderDetails /&gt;}
+      {<span class="branch-0 cbranch-no" title="branch not covered" >data &amp;&amp; !<span class="branch-0 cbranch-no" title="branch not covered" >isFetching &amp;&amp; (</span></span>
 <span class="cstat-no" title="statement not covered" >        &lt;DetailsItem&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;ProductImages src={data.images[0]} alt={data.title} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;DetailsTitle&gt;{data.title}&lt;/DetailsTitle&gt;</span>
@@ -175,14 +175,14 @@ export const Details = <span class="fstat-no" title="function not covered" >() =
 <span class="cstat-no" title="statement not covered" >          &lt;/ul&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;p&gt;{data.description}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/DetailsItem&gt;</span>
-<span class="cstat-no" title="statement not covered" >      )}</span>
-<span class="cstat-no" title="statement not covered" >      &lt;NavLink to={`/${location.search}`} className={'details-cancel'}&gt;</span>
-<span class="cstat-no" title="statement not covered" >        Cancel</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/NavLink&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {!data &amp;&amp; !isFetching &amp;&amp; &lt;div&gt;No Result&lt;/div&gt;}</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/DetailsContainer&gt;</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+      )}
+      &lt;NavLink to={`/${location.search}`} className={'details-cancel'}&gt;
+        Cancel
+      &lt;/NavLink&gt;
+      {!data &amp;&amp; !<span class="branch-0 cbranch-no" title="branch not covered" >isFetching &amp;&amp; &lt;div&gt;No Result&lt;/div&gt;}</span>
+    &lt;/DetailsContainer&gt;
+  );
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -190,7 +190,7 @@ export const Details = <span class="fstat-no" title="function not covered" >() =
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-18T18:02:33.711Z
+                at 2023-11-19T09:31:16.986Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.31% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/19</span>
+                <span class='fraction'>19/19</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">80% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.31% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/19</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,39 +87,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NavLink } from 'react-router-dom';
 import { ChildrenContentProps } from '../../type/type';
 import { ItemImg, ResultsItem, ItemTitle } from './style';
 &nbsp;
-export const ChildComponent = <span class="fstat-no" title="function not covered" >(props: ChildrenContentProps) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;NavLink</span>
-<span class="cstat-no" title="statement not covered" >      to={`/details/${props.data.id}/${location.search}`}</span>
-<span class="cstat-no" title="statement not covered" >      className={({ isActive, isPending }) =&gt;</span>
-<span class="cstat-no" title="statement not covered" >        isActive ? 'active' : isPending ? 'pending' : ''</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    &gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;ResultsItem&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ItemImg src={props.data.images[0]} alt={props.data.title} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ItemTitle&gt;{props.data.title}&lt;/ItemTitle&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/ResultsItem&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/NavLink&gt;</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+export const ChildComponent = (props: ChildrenContentProps) =&gt; {
+  return (
+    &lt;NavLink
+      to={`/details/${props.data.id}/${location.search}`}
+      className={({ isActive, isPending }) =&gt;
+        isActive ? 'active' : <span class="branch-0 cbranch-no" title="branch not covered" >isPending ? 'pending' : '</span>'
+      }
+    &gt;
+      &lt;ResultsItem&gt;
+        &lt;ItemImg src={props.data.images[0]} alt={props.data.title} /&gt;
+        &lt;ItemTitle&gt;{props.data.title}&lt;/ItemTitle&gt;
+      &lt;/ResultsItem&gt;
+    &lt;/NavLink&gt;
+  );
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -127,7 +127,7 @@ export const ChildComponent = <span class="fstat-no" title="function not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-18T18:02:33.711Z
+                at 2023-11-19T09:31:16.986Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

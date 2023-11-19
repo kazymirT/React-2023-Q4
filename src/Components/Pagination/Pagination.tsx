@@ -16,13 +16,21 @@ export const Pagination = (props: PaginationPropsType) => {
 
   return (
     <div className="pagination">
-      <button onClick={handlePrevPage} disabled={currentPage === 1}>
+      <button
+        onClick={handlePrevPage}
+        data-testId="btn-prev"
+        disabled={currentPage === 1}
+      >
         &#8656;
       </button>
       <span>
         {currentPage}/{totalPages}
       </span>
-      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+      <button
+        onClick={handleNextPage}
+        data-testId="btn-next"
+        disabled={currentPage === totalPages}
+      >
         &#8658;
       </button>
     </div>
