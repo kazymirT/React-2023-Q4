@@ -5,11 +5,10 @@ import { setSearchValue } from '../../Slice/searchSlice';
 import { RootState } from '../../Store/store';
 import { setLocalStorages } from '../Storage/Storage';
 import { updatePage } from '../../Slice/fetchArgSlice';
-import { useHistory } from 'react-router-use-history';
+import { updateSearchParams } from '../../utils/updateSearchParams';
 
 export const Search = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { searchValue } = useSelector((state: RootState) => state.searchValue);
   const [query, setQuery] = useState(searchValue);
 
@@ -17,24 +16,17 @@ export const Search = () => {
     setQuery(searchValue);
   }, [searchValue]);
 
-  const updateUrlPage = useCallback(
-    (newSearch: string) => {
-      const newUrl = new URL(location.toString());
-      newUrl.searchParams.set('search', `${newSearch}`);
-      history.push(newUrl.search);
-    },
-    [history]
-  );
-
   const handlerSubmit = useCallback(
     (event: React.ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
+
       dispatch(setSearchValue(query));
       dispatch(updatePage({ page: '1' }));
+
       setLocalStorages('search', query);
-      updateUrlPage(query);
+      updateSearchParams('search', query);
     },
-    [dispatch, query, updateUrlPage]
+    [dispatch, query]
   );
 
   return (

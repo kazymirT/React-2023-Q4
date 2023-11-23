@@ -28,7 +28,10 @@ describe('ChildComponent', () => {
     expect(screen.getByText(testData.title)).toBeInTheDocument();
     expect(navLink).toBeInTheDocument();
     expect(img).toBeInTheDocument();
+    expect(navLink).not.toHaveClass('active');
+    expect(navLink).not.toHaveClass('pending');
   });
+
   test('click NavLink', () => {
     renderWithRouter(<ChildComponent data={testData} />);
 
@@ -37,5 +40,6 @@ describe('ChildComponent', () => {
 
     fireEvent.click(screen.getByRole('link'));
     expect(navLink).toHaveClass('active');
+    expect(navLink).not.toHaveClass('pending');
   });
 });

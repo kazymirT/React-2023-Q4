@@ -1,21 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { InitialFetchArgState, UpdateArgPayload } from '../type/type';
 
-export type InitialFetchArgState = {
-  limit: string;
-  page: string;
-  total: string;
-};
+const params = new URLSearchParams(window.location.search);
 
-export type UpdateArgPayload = {
-  payload: {
-    limit?: string;
-    page?: string;
-    total?: string;
-  };
-};
 const initialState: InitialFetchArgState = {
-  limit: new URLSearchParams(location.search).get('limit') || '5',
-  page: new URLSearchParams(location.search).get('page') || '1',
+  limit: params.get('limit') || '5',
+  page: params.get('page') || '1',
   total: '',
 };
 

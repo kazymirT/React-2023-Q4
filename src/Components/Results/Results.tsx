@@ -6,13 +6,12 @@ import { useGetProductsByNameQuery } from '../Api/getData';
 import { RootState } from '../../Store/store';
 import { Select } from '../Select/Select';
 import { Pagination } from '../Pagination/Pagination';
-import { useHistory } from 'react-router-use-history';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLimit, updatePage } from '../../Slice/fetchArgSlice';
+import { updateSearchParams } from '../../utils/updateSearchParams';
 
 export const Results = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { isMainLoading } = useSelector((state: RootState) => state.isLoading);
   const { searchValue } = useSelector((state: RootState) => state.searchValue);
   const { limit, page } = useSelector((state: RootState) => state.fetchArg);
@@ -24,32 +23,23 @@ export const Results = () => {
     page: String(skip),
   });
 
-  const updateUrlParams = (newPage: string, newLimit?: string) => {
-    const newUrl = new URL(location.toString());
-    if (newLimit) {
-      newUrl.searchParams.set('limit', newLimit);
-    }
-    newUrl.searchParams.set('page', newPage);
-    history.push(newUrl.search);
-  };
-
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
     if (newLimit !== limit) {
       dispatch(updatePage({ page: '1' }));
       dispatch(updateLimit({ limit: newLimit }));
-      updateUrlParams('1', newLimit);
+      updateSearchParams('limit', newLimit);
     }
   };
   const handlePageChange = (newPage: number, totalPages: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       dispatch(updatePage({ page: String(newPage) }));
-      updateUrlParams(String(newPage));
+      updateSearchParams('page', String(newPage));
     }
   };
   return (
-    <ResultsContainer>
+    <ResultsContainer data-test="results">
       {isMainLoading && <Loader />}
 
       {data && data.products.length > 0 && (

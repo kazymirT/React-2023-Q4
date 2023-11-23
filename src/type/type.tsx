@@ -98,3 +98,23 @@ export type PaginationPropsType = {
   total: string;
   onChange: (pageNumber: number, totalPages: number) => void;
 };
+
+export type InitialFetchArgState = {
+  limit: string;
+  page: string;
+  total: string;
+};
+
+export type UpdateArgPayload = {
+  payload: {
+    limit?: string;
+    page?: string;
+    total?: string;
+  };
+};
+
+export type FetchArgType = {
+  name: string;
+  limit: string;
+  page: string;
+};

@@ -46,3 +46,27 @@ describe('searchSlice', () => {
     expect(readSearchValue).toBe(newSearchValue);
   });
 });
+
+describe('getInitialSearchValue', () => {
+  test('should return empty string when location.search is empty', () => {
+    Object.defineProperty(window, 'location', {
+      value: { search: '' },
+      writable: true,
+    });
+
+    const result = getInitialSearchValue();
+
+    expect(result).toBe(' ');
+  });
+
+  test('should return search parameter from location.search', () => {
+    Object.defineProperty(window, 'location', {
+      value: { search: '?search=test' },
+      writable: true,
+    });
+
+    const result = getInitialSearchValue();
+
+    expect(result).toBe('test');
+  });
+});

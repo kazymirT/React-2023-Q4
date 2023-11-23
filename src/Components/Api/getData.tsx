@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ProductResponse, ProductsType } from '../../type/type';
+import { FetchArgType, ProductResponse, ProductsType } from '../../type/type';
 import {
   setIsDetailsError,
   setIsDetailsLoading,
@@ -8,12 +8,6 @@ import {
 } from '../../Slice/isLoadingSlice';
 import { setDetailsData, setMainData } from '../../Slice/dataSlice';
 import { updateTotal } from '../../Slice/fetchArgSlice';
-
-type FetchArgType = {
-  name: string;
-  limit: string;
-  page: string;
-};
 
 export const getProducts = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),

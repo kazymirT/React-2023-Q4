@@ -9,7 +9,6 @@ import { MemoryRouter } from 'react-router-dom';
 describe('Loading indicator is displayed while fetching data', () => {
   afterEach(() => cleanup());
   it('Shows loading indicator', async () => {
-    screen.debug();
     store.dispatch(setIsDetailsLoading(true));
     render(
       <MemoryRouter>
