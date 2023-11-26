@@ -23,7 +23,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        cards: data
+        cards: data,
       },
     };
   },
@@ -31,15 +31,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
 type HomePropsType = {
   cards: {
     data: ProductResponse;
-  } 
-}
+  };
+};
 
 const Home = (data: HomePropsType) => {
   const newData: ProductResponse = data.cards.data;
   return (
     <>
       <Header />
-      <Results data={newData}/>
+      <Results data={newData} />
     </>
   );
 };

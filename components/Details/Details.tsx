@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { updateParams } from "../utils/updateSearchParams";
-import { useGetProductByIdQuery } from "../../pages/api/getData";
 import { ProductsType } from "../type/type";
 type DetailsPropsType = {
   data: ProductsType;

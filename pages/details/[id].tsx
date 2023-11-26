@@ -6,7 +6,11 @@ import {
 } from "../api/getData";
 import { useRouter } from "next/router";
 import { wrapper } from "../../components/Store/store";
-import { FetchArgType, ProductResponse, ProductsType } from "../../components/type/type";
+import {
+  FetchArgType,
+  ProductResponse,
+  ProductsType,
+} from "../../components/type/type";
 import { updateParams } from "../../components/utils/updateSearchParams";
 import { Results } from "../../components/Results/Results";
 import { Header } from "../../components/Header/Header";
@@ -17,39 +21,41 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const productId =
       typeof context.query.id === "string" ? context.query.id : "";
 
-      const fetchArg: FetchArgType = {
-        name:
-          typeof context.query.search === "string" ? context.query.search : " ",
-        limit:
-          typeof context.query.limit === "string" ? context.query.limit : "5",
-        page: typeof context.query.page === "string" ? context.query.page : "1",
-      };
-      const skip: string = String(
-        (Number(fetchArg.page) - 1) * Number(fetchArg.limit),
-      );
-      fetchArg.page = skip;
-  
-      const data = await store.dispatch(getProductsByName.initiate(fetchArg));
-      const detailsData = await store.dispatch(getProductById.initiate(productId));
+    const fetchArg: FetchArgType = {
+      name:
+        typeof context.query.search === "string" ? context.query.search : " ",
+      limit:
+        typeof context.query.limit === "string" ? context.query.limit : "5",
+      page: typeof context.query.page === "string" ? context.query.page : "1",
+    };
+    const skip: string = String(
+      (Number(fetchArg.page) - 1) * Number(fetchArg.limit),
+    );
+    fetchArg.page = skip;
 
-      await Promise.all(store.dispatch(getRunningQueriesThunk()));
-  
-      return {
-        props: {
-          cards: data,
-          details: detailsData
-        },
-      };
+    const data = await store.dispatch(getProductsByName.initiate(fetchArg));
+    const detailsData = await store.dispatch(
+      getProductById.initiate(productId),
+    );
+
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+      props: {
+        cards: data,
+        details: detailsData,
+      },
+    };
   },
 );
 type HomePropsType = {
   cards: {
     data: ProductResponse;
-  },
+  };
   details: {
-    data: ProductsType
-  }
-}
+    data: ProductsType;
+  };
+};
 const Home = (props: HomePropsType) => {
   const resultsData: ProductResponse = props.cards.data;
   const detailsData = props.details.data;
@@ -67,8 +73,8 @@ const Home = (props: HomePropsType) => {
     <>
       <Header />
       <div className="details-container" onClick={handleClick}>
-        <Results data={resultsData}/>
-        <Details data={detailsData}/>
+        <Results data={resultsData} />
+        <Details data={detailsData} />
       </div>
     </>
   );

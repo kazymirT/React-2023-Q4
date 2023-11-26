@@ -5,14 +5,15 @@ import { useRouter } from "next/router";
 import { Select } from "../Select/Select";
 import { Pagination } from "../Pagination/Pagination";
 import { updateSearchParams } from "../utils/updateSearchParams";
-import { FetchArgType, ProductResponse } from "../type/type";
-import { useGetProductsByNameQuery } from "../../pages/api/getData";
+import { ProductResponse } from "../type/type";
+
 type ResultsPropsType = {
   data: ProductResponse;
-}
+};
+
 export const Results = (props: ResultsPropsType) => {
   const router = useRouter();
-  
+
   // const fetchArg: FetchArgType = {
   //   name: typeof router.query.search === "string" ? router.query.search : " ",
   //   limit: typeof router.query.limit === "string" ? router.query.limit : "5",
