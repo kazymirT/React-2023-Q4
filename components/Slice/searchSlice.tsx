@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 // export const getInitialSearchValue = () => {
 //   return (
@@ -8,11 +8,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 // };
 
 const initialState = {
-  searchValue: '',
+  searchValue: "",
 };
 
 export const searchValueSlice = createSlice({
-  name: 'searchValue',
+  name: "searchValue",
   initialState,
   reducers: {
     setSearchValue: (state, action: PayloadAction<string>) => {

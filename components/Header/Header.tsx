@@ -1,5 +1,5 @@
-import { ErrorBtn } from '../ErrorBtn/ErrorBtn';
-import { Search } from '../Search/Search';
+import { ErrorBtn } from "../ErrorBtn/ErrorBtn";
+import { Search } from "../Search/Search";
 
 export const Header = () => {
   return (

@@ -15,7 +15,7 @@
 }
 .loader::before,
 .loader::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   transform: translate(-50%, 10%);
@@ -75,7 +75,7 @@
 }
 .loader-details:before,
 .loader-details:after {
-  content: '';
+  content: "";
   position: absolute;
   border-radius: 50%;
   inset: 0;

@@ -1,10 +1,11 @@
-import { PaginationPropsType } from '../type/type';
+import { PaginationPropsType } from "../type/type";
 
 export const Pagination = (props: PaginationPropsType) => {
   const totalPages: number = Math.ceil(
-    Number(props.total) / Number(props.limit)
+    Number(props.total) / Number(props.limit),
   );
-  const currentPage: number = props.page === 0 || isNaN(props.page) ? 1 : props.page;
+  const currentPage: number =
+    props.page === 0 || isNaN(props.page) ? 1 : props.page;
   const handlePrevPage = () => {
     props.onChange(currentPage - 1, totalPages);
   };

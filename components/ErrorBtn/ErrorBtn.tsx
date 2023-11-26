@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const ErrorBtn = () => {
   const [state, setState] = useState({ hasError: false });
@@ -8,7 +8,7 @@ export const ErrorBtn = () => {
   };
 
   if (state.hasError) {
-    throw new Error('I crashed!');
+    throw new Error("I crashed!");
   }
 
   return (

@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import styles from '../styles/page404.module.css';
+import { useRouter } from "next/router";
+import styles from "../styles/page404.module.css";
 
 const Page404 = () => {
   const router = useRouter();
 
   const goToMainPage = () => {
-    router.push('/');
+    router.push("/");
   };
 
   return (

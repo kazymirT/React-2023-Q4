@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { InitialFetchArgState, UpdateArgPayload } from '../type/type';
+import { createSlice } from "@reduxjs/toolkit";
+import { InitialFetchArgState, UpdateArgPayload } from "../type/type";
 
 // const params = new URLSearchParams(window.location.search);
 
 const initialState: InitialFetchArgState = {
   // limit: params.get('limit') || '5',
   // page: params.get('page') || '1',
-  limit: '5',
-  page: '1',
-  total: '',
+  limit: "5",
+  page: "1",
+  total: "",
 };
 
 export const fetchArgSlice = createSlice({
-  name: 'searchValue',
+  name: "searchValue",
   initialState,
   reducers: {
     updateLimit: (state, action: UpdateArgPayload) => {

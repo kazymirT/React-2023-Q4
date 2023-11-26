@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isMainLoading: false,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const isLoadingSlice = createSlice({
-  name: 'isLoading',
+  name: "isLoading",
   initialState,
   reducers: {
     setIsMainLoading: (state, action) => {

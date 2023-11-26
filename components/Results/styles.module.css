@@ -1,24 +1,21 @@
-
 .container {
   display: flex;
   flex-direction: column;
   width: 100%;
-};
+}
 
-
-#left-page{
+#left-page {
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-};
+}
 
-.control{
+.control {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-bottom: 10px;
-};
-
+}
