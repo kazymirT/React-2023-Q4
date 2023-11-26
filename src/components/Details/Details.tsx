@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { updateParams } from "../utils/updateSearchParams";
 import { ProductsType } from "../type/type";
+
 type DetailsPropsType = {
   data: ProductsType;
 };

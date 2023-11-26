@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tests for the Search component > Clicking the Search button saves the entered value to the local storage 1`] = `
+<form
+  data-testid="search-form"
+  role="search"
+>
+  <input
+    class="_input_21ed85"
+    data-testid="search-input"
+    name="search"
+    placeholder="What product are you looking for?"
+    type="text"
+    value="watch"
+  />
+  <button
+    class="_btn_21ed85"
+    id="search-button"
+    type="submit"
+  >
+    Search
+  </button>
+</form>
+`;
+
+exports[`Tests for the Search component > The component retrieves the value from the local storage upon mounting. 1`] = `
+<form
+  data-testid="search-form"
+  role="search"
+>
+  <input
+    class="_input_21ed85"
+    data-testid="search-input"
+    name="search"
+    placeholder="What product are you looking for?"
+    type="text"
+    value="watch"
+  />
+  <button
+    class="_btn_21ed85"
+    id="search-button"
+    type="submit"
+  >
+    Search
+  </button>
+</form>
+`;
