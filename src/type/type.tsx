@@ -86,3 +86,35 @@ export type ResultsLoader = {
     limit: string;
   };
 };
+
+export type SelectPropsType = {
+  limit: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type PaginationPropsType = {
+  limit: string;
+  page: string;
+  total: string;
+  onChange: (pageNumber: number, totalPages: number) => void;
+};
+
+export type InitialFetchArgState = {
+  limit: string;
+  page: string;
+  total: string;
+};
+
+export type UpdateArgPayload = {
+  payload: {
+    limit?: string;
+    page?: string;
+    total?: string;
+  };
+};
+
+export type FetchArgType = {
+  name: string;
+  limit: string;
+  page: string;
+};

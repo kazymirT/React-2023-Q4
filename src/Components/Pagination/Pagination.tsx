@@ -1,48 +1,37 @@
-import { useHistory } from 'react-router-use-history';
-import { ProductsType } from '../../type/type';
-import { useContext } from 'react';
-import { MyContext } from '../../Context/MyContext';
+import { PaginationPropsType } from '../../type/type';
 
-type PaginationLoader = {
-  url: URL;
-  data: {
-    skip: string;
-    products: ProductsType[];
-    total: string;
-    limit: string;
+export const Pagination = (props: PaginationPropsType) => {
+  const skip: number = (Number(props.page) - 1) * Number(props.limit);
+  const totalPages: number = Math.ceil(
+    Number(props.total) / Number(props.limit)
+  );
+  const currentPage: number = Number(skip) / Number(props.limit) + 1;
+
+  const handlePrevPage = () => {
+    props.onChange(currentPage - 1, totalPages);
   };
-};
-
-export const Pagination = () => {
-  const history = useHistory();
-  const { url, data } = useContext(MyContext) as PaginationLoader;
-  const totalPages: number = Math.ceil(Number(data.total) / Number(data.limit));
-  const currentPage: number = Number(data.skip) / Number(data.limit) + 1;
-
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      const newUrl = new URL(url.toString());
-      newUrl.searchParams.set('page', `${newPage}`);
-      history.push(newUrl.search);
-    }
+  const handleNextPage = () => {
+    props.onChange(currentPage + 1, totalPages);
   };
 
   return (
     <div className="pagination">
       <button
-        onClick={() => handlePageChange(currentPage - 1)}
+        onClick={handlePrevPage}
+        data-testid="btn-prev"
         disabled={currentPage === 1}
       >
-        {'<'}
+        &#8656;
       </button>
       <span>
         {currentPage}/{totalPages}
       </span>
       <button
-        onClick={() => handlePageChange(currentPage + 1)}
+        onClick={handleNextPage}
+        data-testid="btn-next"
         disabled={currentPage === totalPages}
       >
-        {'>'}
+        &#8658;
       </button>
     </div>
   );

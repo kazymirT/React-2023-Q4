@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-// type ResultsContainerProps = {
-//   hidden: boolean;
-// };
+
 export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;

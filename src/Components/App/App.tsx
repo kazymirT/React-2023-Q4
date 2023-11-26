@@ -1,11 +1,29 @@
-import { RouterProvider } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import { router } from '../../router';
+import { Page } from '../../containers/Page/Page';
+import { Details } from '../Details/Details';
+import { Page404 } from '../../containers/Page404/Page404';
+import { ErrorPage } from '../../containers/PageError/PageError';
+import { Provider } from 'react-redux';
+import { store } from '../../Store/store';
+
+export const AppRouter = () => {
+  return (
+    <Routes>
+      <Route path={'/'} element={<Page />} errorElement={<ErrorPage />}>
+        <Route path="details/:detailsId" element={<Details />} />
+      </Route>
+      <Route path="*" element={<Page404 />}></Route>
+    </Routes>
+  );
+};
 
 export const App = () => {
   return (
-    <ErrorBoundary>
-      <RouterProvider router={router}></RouterProvider>
-    </ErrorBoundary>
+    <Provider store={store}>
+      <ErrorBoundary>
+        <AppRouter />
+      </ErrorBoundary>
+    </Provider>
   );
 };

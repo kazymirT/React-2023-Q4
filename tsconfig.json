@@ -15,8 +15,10 @@
     "isolatedModules": true,
     "noImplicitAny": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["vitest/globals"]
   },
-  "include": ["src"],
+  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "include": [".eslintrc.cjs", "src", "src/.prettierrc.cjs", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

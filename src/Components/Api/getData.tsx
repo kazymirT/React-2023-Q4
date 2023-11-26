@@ -1,30 +1,51 @@
-export const getDate = async (
-  search: string,
-  limitSearch?: string,
-  currentPage?: string
-) => {
-  try {
-    const searchName = search ? search : ' ';
-    const limit = limitSearch ? limitSearch : 5;
-    const skip = currentPage ? Number(limit) * (Number(currentPage) - 1) : 0;
-    const response = await fetch(
-      `https://dummyjson.com/products/search?q=${searchName}&limit=${limit}&skip=${skip}`
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { FetchArgType, ProductResponse, ProductsType } from '../../type/type';
+import {
+  setIsDetailsError,
+  setIsDetailsLoading,
+  setIsMainError,
+  setIsMainLoading,
+} from '../../Slice/isLoadingSlice';
+import { setDetailsData, setMainData } from '../../Slice/dataSlice';
+import { updateTotal } from '../../Slice/fetchArgSlice';
 
-export const getProduct = async (productId: string) => {
-  try {
-    const response = await fetch(`https://dummyjson.com/products/${productId}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+export const getProducts = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+  endpoints: (build) => ({
+    getProductsByName: build.query<ProductResponse, FetchArgType>({
+      query: (fetchArg) =>
+        `products/search?q=${fetchArg.name}&limit=${fetchArg.limit}&skip=${fetchArg.page}`,
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsMainLoading(true));
+        dispatch(setIsMainError(false));
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setMainData(data));
+          dispatch(updateTotal({ total: data.total }));
+          dispatch(setIsMainLoading(false));
+        } catch (err) {
+          dispatch(setIsMainError(true));
+          dispatch(setIsMainLoading(false));
+        }
+      },
+    }),
+    getProductById: build.query<ProductsType, string>({
+      query: (productId) => `products/${productId}`,
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsDetailsLoading(true));
+        dispatch(setIsDetailsError(false));
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setDetailsData(data));
+          dispatch(setIsDetailsLoading(false));
+        } catch (err) {
+          dispatch(setIsDetailsError(true));
+          dispatch(setIsDetailsLoading(false));
+        }
+      },
+    }),
+  }),
+});
+
+export const { useGetProductsByNameQuery, useGetProductByIdQuery } =
+  getProducts;
