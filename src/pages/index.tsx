@@ -1,3 +1,4 @@
+import React from "react";
 import { Header } from "../components/Header/Header";
 import { Results } from "../components/Results/Results";
 import { wrapper } from "../components/Store/store";
@@ -34,7 +35,7 @@ type HomePropsType = {
   };
 };
 
-const Home = (data: HomePropsType) => {
+const Home: React.FC<HomePropsType> = (data: HomePropsType) => {
   const newData: ProductResponse = data.cards.data;
   return (
     <>

@@ -1,20 +1,25 @@
+import React from "react";
 import { PaginationPropsType } from "../type/type";
 
-export const Pagination = (props: PaginationPropsType) => {
-  const totalPages: number = Math.ceil(
-    Number(props.total) / Number(props.limit),
-  );
-  const currentPage: number =
-    props.page === 0 || isNaN(props.page) ? 1 : props.page;
+export const Pagination: React.FC<PaginationPropsType> = ({
+  limit,
+  page,
+  total,
+  onChange,
+}) => {
+  const skip: number = (Number(page) - 1) * Number(limit);
+  const currentPage: number = Number(skip) / Number(limit) + 1;
+  const totalPages: number = Math.ceil(Number(total) / Number(limit));
+
   const handlePrevPage = () => {
-    props.onChange(currentPage - 1, totalPages);
+    onChange(currentPage - 1, totalPages);
   };
   const handleNextPage = () => {
-    props.onChange(currentPage + 1, totalPages);
+    onChange(currentPage + 1, totalPages);
   };
 
   return (
-    <div className="pagination">
+    <div className="pagination" data-testid={"pagination"}>
       <button
         onClick={handlePrevPage}
         data-testid="btn-prev"
@@ -22,7 +27,7 @@ export const Pagination = (props: PaginationPropsType) => {
       >
         &#8656;
       </button>
-      <span>
+      <span data-testid={"pagination-page"}>
         {currentPage}/{totalPages}
       </span>
       <button

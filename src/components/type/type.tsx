@@ -94,7 +94,6 @@ export type SelectPropsType = {
 
 export type PaginationPropsType = {
   limit: number;
-  skip: number;
   total: number;
   page: number;
   onChange: (pageNumber: number, totalPages: number) => void;

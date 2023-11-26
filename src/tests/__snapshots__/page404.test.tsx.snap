@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tests for the 404 Page component > 404 page is displayed when navigating to an invalid route. 1`] = `
+<body>
+  <div>
+    <div
+      class="_container_fd74bb"
+    >
+      <h1
+        class="_title_fd74bb"
+      >
+        404
+      </h1>
+      <p
+        class="_message_fd74bb"
+      >
+        Page not found
+      </p>
+      <button>
+        Go to main page
+      </button>
+    </div>
+  </div>
+</body>
+`;

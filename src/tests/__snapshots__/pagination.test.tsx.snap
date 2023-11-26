@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tests for the Pagination component > The component updates URL query parameter when page changes 1`] = `
+<div
+  class="pagination"
+  data-testid="pagination"
+>
+  <button
+    data-testid="btn-prev"
+  >
+    ⇐
+  </button>
+  <span
+    data-testid="pagination-page"
+  >
+    2
+    /
+    3
+  </span>
+  <button
+    data-testid="btn-next"
+  >
+    ⇒
+  </button>
+</div>
+`;

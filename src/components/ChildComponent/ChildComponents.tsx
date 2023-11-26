@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { ChildrenContentProps } from "../type/type";
 import styles from "./styles.module.css";
@@ -6,9 +7,9 @@ import { useRouter } from "next/router";
 import { updateParams } from "../utils/updateSearchParams";
 
 export const ChildComponent = (props: ChildrenContentProps) => {
-  const { id } = props.data;
-  const router = useRouter();
-  const params = updateParams(router.query);
+  const { id, title, images } = props.data;
+  const query = useRouter().query;
+  const params = updateParams(query);
 
   return (
     <>
@@ -19,10 +20,10 @@ export const ChildComponent = (props: ChildrenContentProps) => {
             width={300}
             height={300}
             priority={true}
-            src={props.data.images[0]}
-            alt={props.data.title}
+            src={images[0]}
+            alt={title}
           />
-          <h2 className={styles.title}>{props.data.title}</h2>
+          <h2 className={styles.title}>{title}</h2>
         </div>
       </Link>
     </>

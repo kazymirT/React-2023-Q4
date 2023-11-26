@@ -4,8 +4,11 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./src/tests/setup.ts"],
-    watch: false,
     globals: true,
+    coverage: {
+      include: ["src/"],
+      exclude: ["src/components/type/type.tsx", "src/pages/"],
+    },
   },
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],

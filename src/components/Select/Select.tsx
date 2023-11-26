@@ -1,3 +1,4 @@
+import React from "react";
 import { SelectPropsType } from "../type/type";
 
 export const Select = (props: SelectPropsType) => {

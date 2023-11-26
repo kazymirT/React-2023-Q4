@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./style.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,17 +16,18 @@ export const Details = (props: DetailsPropsType) => {
   const { data } = props;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid={"details"}>
       {data && (
         <div className={styles.item}>
           <Image
             src={data.images[0]}
+            priority={true}
             className={styles.img}
             width={390}
             height={300}
             alt={data.title}
           />
-          <h2>{data.title}</h2>
+          <h2 data-testid={"details-title"}>{data.title}</h2>
           <ul>
             <li>Brand: {data.brand}</li>
             <li>Category: {data.category}</li>

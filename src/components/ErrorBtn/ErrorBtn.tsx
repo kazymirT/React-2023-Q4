@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 
 export const ErrorBtn = () => {
   const [state, setState] = useState({ hasError: false });

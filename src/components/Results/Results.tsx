@@ -1,3 +1,4 @@
+import React from "react";
 import { ChildComponent } from "../ChildComponent/ChildComponents";
 import styles from "./styles.module.css";
 import { NoResults } from "../NoResults";
@@ -14,20 +15,7 @@ type ResultsPropsType = {
 export const Results = (props: ResultsPropsType) => {
   const router = useRouter();
 
-  // const fetchArg: FetchArgType = {
-  //   name: typeof router.query.search === "string" ? router.query.search : " ",
-  //   limit: typeof router.query.limit === "string" ? router.query.limit : "5",
-  //   page: typeof router.query.page === "string" ? router.query.page : "1",
-  // };
-
-  // const skip: number = (Number(fetchArg.page) - 1) * Number(fetchArg.limit);
-  // fetchArg.page = String(skip);
-
-  // const result = useGetProductsByNameQuery(fetchArg, {
-  //   skip: router.isFallback,
-  // });
   const data: ProductResponse | undefined = props.data;
-
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
@@ -60,8 +48,7 @@ export const Results = (props: ResultsPropsType) => {
             />
             <Pagination
               limit={Number(data.limit)}
-              skip={Number(data.skip)}
-              page={Number(router.query.page)}
+              page={router.query.page ? Number(router.query.page) : 1}
               total={Number(data.total)}
               onChange={handlePageChange}
             />
