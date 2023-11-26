@@ -62,13 +62,14 @@ exports[`Tests for the Card List component > Component renders the specified num
         >
           <button
             data-testid="btn-prev"
+            disabled=""
           >
             ⇐
           </button>
           <span
             data-testid="pagination-page"
           >
-            NaN
+            1
             /
             10
           </span>
