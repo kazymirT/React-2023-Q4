@@ -1,7 +1,7 @@
 import { Header } from "../components/Header/Header";
 import { Results } from "../components/Results/Results";
 import { wrapper } from "../components/Store/store";
-import { FetchArgType } from "../components/type/type";
+import { FetchArgType, ProductResponse } from "../components/type/type";
 import { getProductsByName, getRunningQueriesThunk } from "./api/getData";
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -17,20 +17,29 @@ export const getServerSideProps = wrapper.getServerSideProps(
       (Number(fetchArg.page) - 1) * Number(fetchArg.limit),
     );
     fetchArg.page = skip;
-    store.dispatch(getProductsByName.initiate(fetchArg));
+
+    const data = await store.dispatch(getProductsByName.initiate(fetchArg));
     await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
     return {
-      props: {},
+      props: {
+        cards: data
+      },
     };
   },
 );
+type HomePropsType = {
+  cards: {
+    data: ProductResponse;
+  } 
+}
 
-const Home = () => {
+const Home = (data: HomePropsType) => {
+  const newData: ProductResponse = data.cards.data;
   return (
     <>
       <Header />
-      <Results />
+      <Results data={newData}/>
     </>
   );
 };

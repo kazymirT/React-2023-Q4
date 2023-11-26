@@ -7,22 +7,25 @@ import { Pagination } from "../Pagination/Pagination";
 import { updateSearchParams } from "../utils/updateSearchParams";
 import { FetchArgType, ProductResponse } from "../type/type";
 import { useGetProductsByNameQuery } from "../../pages/api/getData";
-
-export const Results = () => {
+type ResultsPropsType = {
+  data: ProductResponse;
+}
+export const Results = (props: ResultsPropsType) => {
   const router = useRouter();
-  const fetchArg: FetchArgType = {
-    name: typeof router.query.search === "string" ? router.query.search : " ",
-    limit: typeof router.query.limit === "string" ? router.query.limit : "5",
-    page: typeof router.query.page === "string" ? router.query.page : "1",
-  };
+  
+  // const fetchArg: FetchArgType = {
+  //   name: typeof router.query.search === "string" ? router.query.search : " ",
+  //   limit: typeof router.query.limit === "string" ? router.query.limit : "5",
+  //   page: typeof router.query.page === "string" ? router.query.page : "1",
+  // };
 
-  const skip: number = (Number(fetchArg.page) - 1) * Number(fetchArg.limit);
-  fetchArg.page = String(skip);
+  // const skip: number = (Number(fetchArg.page) - 1) * Number(fetchArg.limit);
+  // fetchArg.page = String(skip);
 
-  const result = useGetProductsByNameQuery(fetchArg, {
-    skip: router.isFallback,
-  });
-  const data: ProductResponse | undefined = result.data;
+  // const result = useGetProductsByNameQuery(fetchArg, {
+  //   skip: router.isFallback,
+  // });
+  const data: ProductResponse | undefined = props.data;
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
@@ -56,7 +59,7 @@ export const Results = () => {
             />
             <Pagination
               limit={Number(data.limit)}
-              skip={skip}
+              skip={Number(data.skip)}
               page={Number(router.query.page)}
               total={Number(data.total)}
               onChange={handlePageChange}
