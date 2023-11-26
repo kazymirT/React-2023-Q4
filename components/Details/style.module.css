@@ -1,0 +1,26 @@
+
+.container {
+  position: relative;
+  padding: 32px;
+  width: 470px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(28, 28, 28);
+  border-radius: 7px;
+  height: 100%;
+};
+.item {
+  right: 120px;
+  top: 204px;
+  overflow: hidden;
+  max-width: 390px;
+};
+.img {
+  width: 390px;
+  height: 300px;
+  border-radius: 7px;
+};
+.title {
+  text-align: center;
+  color: rgb(181, 168, 145);
+};

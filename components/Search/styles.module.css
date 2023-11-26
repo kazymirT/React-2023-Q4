@@ -1,0 +1,30 @@
+.search {
+  padding: 40px 0;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+};
+
+.btn {
+  display: block;
+  width: 100px;
+  margin-right: 5px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: yellow;
+}
+.btn:hover {
+  background-color: lightcoral;
+}
+.input {
+  width: 300px;
+  padding: 10px 15px;
+  margin-right: 25px;
+  border-radius: 10px;
+  outline: none;
+  border: 5px solid;
+  border-color: green;
+}
