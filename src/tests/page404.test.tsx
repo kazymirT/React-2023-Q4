@@ -18,8 +18,4 @@ describe("Tests for the 404 Page component", () => {
     fireEvent.click(screen.getByText("Go to main page"));
     expect(mockRouter.asPath).toBe("/");
   });
-
-  // it("Render errorElements (not errorPage) to get coverage 100%", async () => {
-  //   render(<ErrorWithFetch param={"animal"} />);
-  // });
 });
