@@ -1,64 +1,40 @@
-import { MouseEventHandler } from "react";
-import {
-  getProductById,
-  getProductsByName,
-  getRunningQueriesThunk,
-} from "../api/getData";
 import { useRouter } from "next/router";
-import { wrapper } from "../../components/Store/store";
-import {
-  FetchArgType,
-  ProductResponse,
-  ProductsType,
-} from "../../components/type/type";
-import { updateParams } from "../../components/utils/updateSearchParams";
-import { Results } from "../../components/Results/Results";
-import { Header } from "../../components/Header/Header";
+import { MouseEventHandler } from "react";
+import React from "react";
+
 import { Details } from "../../components/Details/Details";
+import { Header } from "../../components/Header/Header";
+import { Results } from "../../components/Results/Results";
+import { wrapper } from "../../components/Store/store";
+import { FetchArgType, HomePropsType } from "../../components/type/type";
+import { updateParams } from "../../components/utils/updateSearchParams";
+import { getProductById, getProductsByName } from "../api/getData";
+import { createFetchArg } from "@/components/utils/createFetchArg";
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const productId =
-      typeof context.query.id === "string" ? context.query.id : "";
+  (store) =>
+    async ({ query: { limit, page, search, id } }) => {
+      const productId = typeof id === "string" ? id : "";
 
-    const fetchArg: FetchArgType = {
-      name:
-        typeof context.query.search === "string" ? context.query.search : " ",
-      limit:
-        typeof context.query.limit === "string" ? context.query.limit : "5",
-      page: typeof context.query.page === "string" ? context.query.page : "1",
-    };
-    const skip: string = String(
-      (Number(fetchArg.page) - 1) * Number(fetchArg.limit),
-    );
-    fetchArg.page = skip;
+      const fetchArg: FetchArgType = createFetchArg(search, limit, page);
 
-    const data = await store.dispatch(getProductsByName.initiate(fetchArg));
-    const detailsData = await store.dispatch(
-      getProductById.initiate(productId),
-    );
+      const cardsData = await store.dispatch(
+        getProductsByName.initiate(fetchArg),
+      );
+      const detailsData = await store.dispatch(
+        getProductById.initiate(productId),
+      );
 
-    await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
-    return {
-      props: {
-        cards: data,
-        details: detailsData,
-      },
-    };
-  },
+      return {
+        props: {
+          cards: cardsData,
+          details: detailsData,
+        },
+      };
+    },
 );
-type HomePropsType = {
-  cards: {
-    data: ProductResponse;
-  };
-  details: {
-    data: ProductsType;
-  };
-};
-const Home = (props: HomePropsType) => {
-  const resultsData: ProductResponse = props.cards.data;
-  const detailsData = props.details.data;
+
+const Home = ({ cards, details }: HomePropsType) => {
   const router = useRouter();
 
   const handleClick: MouseEventHandler<HTMLDivElement> = async (event) => {
@@ -69,12 +45,13 @@ const Home = (props: HomePropsType) => {
       router.push(params);
     }
   };
+
   return (
     <>
       <Header />
       <div className="details-container" onClick={handleClick}>
-        <Results data={resultsData} />
-        <Details data={detailsData} />
+        <Results data={cards.data} />
+        <Details data={details.data} />
       </div>
     </>
   );

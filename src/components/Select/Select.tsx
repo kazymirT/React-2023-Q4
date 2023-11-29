@@ -1,12 +1,13 @@
 import React from "react";
+
 import { SelectPropsType } from "../type/type";
 
-export const Select = (props: SelectPropsType) => {
+export const Select = ({ limit, onChange }: SelectPropsType) => {
   return (
     <>
       <div className="selectContainer">
         <span>Cards per page:</span>
-        <select value={props.limit} onChange={props.onChange}>
+        <select value={limit} onChange={onChange}>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="20">20</option>

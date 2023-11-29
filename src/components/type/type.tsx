@@ -118,3 +118,12 @@ export type FetchArgType = {
   limit: string;
   page: string;
 };
+
+export type HomePropsType = {
+  cards: {
+    data: ProductResponse;
+  };
+  details: {
+    data: ProductsType;
+  };
+};

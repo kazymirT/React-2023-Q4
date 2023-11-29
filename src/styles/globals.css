@@ -62,15 +62,6 @@ a:hover {
   padding: 4px;
 }
 
-#left-page {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
 .details-container {
   display: flex;
   max-width: 1280px;

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
+
 import {
   FetchArgType,
   ProductResponse,
@@ -26,8 +27,3 @@ export const getProducts = createApi({
 });
 
 export const { getProductsByName, getProductById } = getProducts.endpoints;
-export const {
-  useGetProductsByNameQuery,
-  useGetProductByIdQuery,
-  util: { getRunningQueriesThunk },
-} = getProducts;

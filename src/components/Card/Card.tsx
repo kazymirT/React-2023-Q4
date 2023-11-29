@@ -1,19 +1,26 @@
-import React from "react";
-import Link from "next/link";
-import { ChildrenContentProps } from "../type/type";
-import styles from "./styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import React from "react";
+
+import styles from "./styles.module.css";
+import { ProductsType } from "../type/type";
 import { updateParams } from "../utils/updateSearchParams";
 
-export const ChildComponent = (props: ChildrenContentProps) => {
-  const { id, title, images } = props.data;
-  const query = useRouter().query;
-  const params = updateParams(query);
+export type CartProps = {
+  products: ProductsType;
+};
+
+export const Card = ({ products: { id, title, images } }: CartProps) => {
+  const router = useRouter();
+  const params = updateParams(router.query);
+
+  const openDetails = () => {
+    router.push(`/details/${id}${params}`);
+  };
 
   return (
     <>
-      <Link href={`/details/${id}${params}`}>
+      <div onClick={openDetails} data-testid={"card"}>
         <div className={styles.item}>
           <Image
             className={styles.images}
@@ -25,7 +32,7 @@ export const ChildComponent = (props: ChildrenContentProps) => {
           />
           <h2 className={styles.title}>{title}</h2>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

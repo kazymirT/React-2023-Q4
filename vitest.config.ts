@@ -7,7 +7,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       include: ["src/"],
-      exclude: ["src/components/type/type.tsx", "src/pages/"],
+      exclude: ["src/components/type/type.tsx"],
     },
   },
   resolve: {

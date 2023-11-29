@@ -1,46 +1,37 @@
 import React from "react";
+
+import { getProductsByName } from "./api/getData";
 import { Header } from "../components/Header/Header";
 import { Results } from "../components/Results/Results";
 import { wrapper } from "../components/Store/store";
 import { FetchArgType, ProductResponse } from "../components/type/type";
-import { getProductsByName, getRunningQueriesThunk } from "./api/getData";
+import { createFetchArg } from "@/components/utils/createFetchArg";
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const fetchArg: FetchArgType = {
-      name:
-        typeof context.query.search === "string" ? context.query.search : " ",
-      limit:
-        typeof context.query.limit === "string" ? context.query.limit : "5",
-      page: typeof context.query.page === "string" ? context.query.page : "1",
-    };
-    const skip: string = String(
-      (Number(fetchArg.page) - 1) * Number(fetchArg.limit),
-    );
-    fetchArg.page = skip;
+  (store) =>
+    async ({ query: { limit, search, page } }) => {
+      const fetchArg: FetchArgType = createFetchArg(search, limit, page);
+      const data = await store.dispatch(getProductsByName.initiate(fetchArg));
 
-    const data = await store.dispatch(getProductsByName.initiate(fetchArg));
-    await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
-    return {
-      props: {
-        cards: data,
-      },
-    };
-  },
+      return {
+        props: {
+          cards: data,
+        },
+      };
+    },
 );
+
 type HomePropsType = {
   cards: {
     data: ProductResponse;
   };
 };
 
-const Home: React.FC<HomePropsType> = (data: HomePropsType) => {
-  const newData: ProductResponse = data.cards.data;
+const Home: React.FC<HomePropsType> = ({ cards: { data } }: HomePropsType) => {
   return (
     <>
       <Header />
-      <Results data={newData} />
+      <Results data={data} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { ProductResponse } from "@/components/type/type";
+import { ProductResponse, ProductsType } from "@/components/type/type";
 
 export function createCardsListResponseMock(arg: boolean) {
   const products: ProductResponse = {
@@ -68,3 +68,21 @@ export function createCardsListResponseMock(arg: boolean) {
 
   return arg ? products : noProducts;
 }
+
+export const cardResponseMock: ProductsType = {
+  brand: "Apple",
+  category: "smartphones",
+  description: "An apple mobile which is nothing like apple",
+  discountPercentage: 12.96,
+  id: 5,
+  images: [
+    "https://i.dummyjson.com/data/products/1/3.jpg",
+    "https://i.dummyjson.com/data/products/1/4.jpg",
+    "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+  ],
+  price: 549,
+  rating: 4.69,
+  stock: 94,
+  thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+  title: "iPhone 9",
+};

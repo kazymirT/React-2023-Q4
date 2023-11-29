@@ -1,16 +1,17 @@
-import React from "react";
-import styles from "./styles.module.css";
-import { useCallback } from "react";
-import { updateSearchParams } from "../utils/updateSearchParams";
 import { useRouter } from "next/router";
+import React, { useRef, useCallback } from "react";
+
+import styles from "./styles.module.css";
+import { updateSearchParams } from "../utils/updateSearchParams";
 
 export const Search = () => {
   const router = useRouter();
-  const handlerSubmit = useCallback(
-    (event: React.ChangeEvent<HTMLFormElement>) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const form = new FormData(event.target);
-      const searchValue: string | null = form.get("search") as string;
+      const searchValue = inputRef.current?.value || "";
       const newUrl = updateSearchParams("search", searchValue);
       localStorage.setItem("search", searchValue);
       router.push(newUrl);
@@ -20,12 +21,13 @@ export const Search = () => {
 
   return (
     <div className={styles.search}>
-      <form role="search" data-testid={"search-form"} onSubmit={handlerSubmit}>
+      <form role="search" data-testid={"search-form"} onSubmit={handleSubmit}>
         <input
           className={styles.input}
           data-testid={"search-input"}
           type="text"
           name="search"
+          ref={inputRef}
           defaultValue={router.query.search}
           placeholder="What product are you looking for?"
         />

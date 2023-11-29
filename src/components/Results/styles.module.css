@@ -19,3 +19,11 @@
   align-items: center;
   margin-bottom: 10px;
 }
+.carts {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

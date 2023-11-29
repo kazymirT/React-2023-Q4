@@ -1,39 +1,39 @@
-import React from "react";
-import styles from "./style.module.css";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { updateParams } from "../utils/updateSearchParams";
+import React from "react";
+
+import styles from "./style.module.css";
 import { ProductsType } from "../type/type";
+import { updateParams } from "../utils/updateSearchParams";
 
 type DetailsPropsType = {
   data: ProductsType;
 };
 
-export const Details = (props: DetailsPropsType) => {
-  const router = useRouter();
-  const params = updateParams(router.query);
-  const { data } = props;
-
+export const Details = ({ data }: DetailsPropsType) => {
+  const query = useRouter().query;
+  const params = updateParams(query);
+  const { title, images, brand, description, category, price } = data;
   return (
     <div className={styles.container} data-testid={"details"}>
       {data && (
         <div className={styles.item}>
           <Image
-            src={data.images[0]}
+            src={images[0]}
             priority={true}
             className={styles.img}
             width={390}
             height={300}
-            alt={data.title}
+            alt={title}
           />
-          <h2 data-testid={"details-title"}>{data.title}</h2>
+          <h2 data-testid={"details-title"}>{title}</h2>
           <ul>
-            <li>Brand: {data.brand}</li>
-            <li>Category: {data.category}</li>
-            <li>Price: {data.price}$</li>
+            <li>Brand: {brand}</li>
+            <li>Category: {category}</li>
+            <li>Price: {price}$</li>
           </ul>
-          <p>{data.description}</p>
+          <p>{description}</p>
         </div>
       )}
       <Link

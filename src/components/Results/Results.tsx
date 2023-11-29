@@ -1,41 +1,48 @@
-import React from "react";
-import { ChildComponent } from "../ChildComponent/ChildComponents";
-import styles from "./styles.module.css";
-import { NoResults } from "../NoResults";
 import { useRouter } from "next/router";
-import { Select } from "../Select/Select";
+import React from "react";
+
+import styles from "./styles.module.css";
+import { Cards } from "../Cards/Carts";
+import { NoResults } from "../NoResults";
 import { Pagination } from "../Pagination/Pagination";
-import { updateSearchParams } from "../utils/updateSearchParams";
+import { Select } from "../Select/Select";
 import { ProductResponse } from "../type/type";
+import { updateSearchParams } from "../utils/updateSearchParams";
 
 type ResultsPropsType = {
   data: ProductResponse;
 };
 
-export const Results = (props: ResultsPropsType) => {
+export const Results = ({
+  data: { limit, products, total },
+}: ResultsPropsType) => {
   const router = useRouter();
 
-  const data: ProductResponse | undefined = props.data;
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value;
 
-    if (newLimit !== data?.limit) {
+    if (newLimit !== limit) {
       setParams("limit", newLimit);
     }
   };
-  const setParams = (paramName: string, paramValue: string) => {
-    const newUrl = updateSearchParams(paramName, paramValue);
-    router.push(newUrl);
-  };
+
   const handlePageChange = (newPage: number, totalPages: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
+    const isNewPageValid = newPage >= 1;
+    const isWithinTotalPages = newPage <= totalPages;
+
+    if (isNewPageValid && isWithinTotalPages) {
       setParams("page", String(newPage));
     }
   };
 
+  const setParams = (paramName: string, paramValue: string) => {
+    const newUrl = updateSearchParams(paramName, paramValue);
+    router.push(newUrl);
+  };
+
   return (
     <div className={styles.container} data-test="results">
-      {data?.products && data.products.length > 0 && (
+      {products.length > 0 && (
         <>
           <div className="control">
             <Select
@@ -47,22 +54,20 @@ export const Results = (props: ResultsPropsType) => {
               onChange={handleSelectChange}
             />
             <Pagination
-              limit={Number(data.limit)}
+              limit={Number(limit)}
               page={router.query.page ? Number(router.query.page) : 1}
-              total={Number(data.total)}
+              total={Number(total)}
               onChange={handlePageChange}
             />
           </div>
 
-          <div className={styles["items"]} id="left-page">
-            {data.products.map((item) => (
-              <ChildComponent key={item.id} data={item} />
-            ))}
+          <div className={styles["carts"]} id="left-page">
+            <Cards products={products} />
           </div>
         </>
       )}
 
-      {data?.products.length === 0 && <NoResults />}
+      {products.length === 0 && <NoResults />}
     </div>
   );
 };
