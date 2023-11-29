@@ -1,6 +1,4 @@
-#!/bin/sh
-# .husky/pre-push
+#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Run your pre-push commands or scripts
-npm run test
+npm test

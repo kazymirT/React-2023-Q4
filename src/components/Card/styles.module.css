@@ -1,0 +1,21 @@
+.item {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.images {
+  margin-bottom: 10px;
+  border-radius: 7px;
+}
+
+.title {
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  color: rgb(181, 168, 145);
+  text-decoration: none;
+}
