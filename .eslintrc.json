@@ -35,66 +35,7 @@
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-var-requires": "off",
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "import/order": [
-      "error",
-      {
-        "groups": ["builtin", "external", "internal"],
-        "pathGroups": [
-          {
-            "pattern": "./mock/**",
-            "group": "external",
-            "position": "before"
-          },
-          {
-            "pattern": "services/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "utils/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "store/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "hooks/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "src/interfaces/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "components/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "pages/**",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "**/*.scss",
-            "group": "unknown",
-            "position": "after"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {
