@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ISubmitForm } from '../Components/Forms/HookForm';
 
 type DataFormType = {
   firstName: string;
@@ -6,7 +7,7 @@ type DataFormType = {
 };
 
 type InitialStateType = {
-  dataFormHook: DataFormType[];
+  dataFormHook: ISubmitForm[];
   dataFormUncontrolled: DataFormType[];
 };
 
@@ -19,8 +20,8 @@ export const dataForms = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    setDataFormHook: (state, action: PayloadAction<DataFormType>) => {
-      state.dataFormHook.push(action.payload);
+    setDataFormHook: (state, action: PayloadAction<ISubmitForm[]>) => {
+      state.dataFormHook = action.payload;
     },
     setDataFormUncontrolled: (state, action: PayloadAction<DataFormType>) => {
       state.dataFormUncontrolled.push(action.payload);
