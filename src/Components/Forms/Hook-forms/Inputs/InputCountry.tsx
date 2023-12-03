@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Register } from './InputPassword';
-import { RootState } from '../../Reduce/store';
-import { UseFormSetError, UseFormSetValue } from 'react-hook-form';
-import { IForm } from '../Forms/HookForm';
+import { RootState } from '../../../../Reduce/store';
+import {
+  UseFormSetError,
+  UseFormSetValue,
+  UseFormTrigger,
+} from 'react-hook-form';
+import { IForm } from '../../../utils/type';
 
 export type SetValue = UseFormSetValue<IForm>;
 export type SetError = UseFormSetError<IForm>;
+export type Trigger = UseFormTrigger<IForm>;
 
 interface Props {
   countriesFilteredVisible: boolean;
@@ -15,20 +20,18 @@ interface Props {
   watchCountry: string | undefined;
   setValue: SetValue;
   error: string | undefined;
-  setError: SetError;
+  trigger: Trigger;
 }
 
-export default function InputCountry(props: Props) {
-  const {
-    register,
-    watchCountry,
-    setValue,
-    error,
-    setError,
-    countriesFilteredVisible,
-    setCountriesFilteredVisible,
-  } = props;
-
+export default function InputCountry({
+  register,
+  watchCountry,
+  setValue,
+  error,
+  trigger,
+  countriesFilteredVisible,
+  setCountriesFilteredVisible,
+}: Props) {
   const counriesAll = useSelector(
     (state: RootState) => state.countriesSlice.countries
   );
@@ -46,8 +49,7 @@ export default function InputCountry(props: Props) {
   };
 
   return (
-    <div className="input-group">
-      <label htmlFor="country"></label>
+    <div className="input-group input-country">
       <input
         type="text"
         id="country"
@@ -60,23 +62,27 @@ export default function InputCountry(props: Props) {
         }}
         onFocus={() => setCountriesFilteredVisible(true)}
       />
-      {countriesFilteredVisible &&
-        watchCountry &&
-        countriesFiltered.map((country) => (
-          <label
-            htmlFor="country"
-            key={country}
-            className="flex flex-col"
-            onClick={() => {
-              setValue('country', country);
-              setError('country', { type: 'no-error', message: '' });
-              setCountriesFiltered([]);
-            }}
-          >
-            {country}
-          </label>
-        ))}
-      <p>{error ? error : ''}</p>
+      {countriesFilteredVisible && watchCountry && (
+        <div className="country-container">
+          {countriesFiltered.map((country) => (
+            <label
+              htmlFor="country"
+              key={country}
+              className={'counter-label'}
+              onClick={() => {
+                setValue('country', country);
+                setCountriesFiltered([]);
+                trigger('country');
+              }}
+            >
+              {country}
+            </label>
+          ))}
+        </div>
+      )}
+      <div className={'error-container'}>
+        {error && <p className={'error-message'}>{error}</p>}
+      </div>
     </div>
   );
 }

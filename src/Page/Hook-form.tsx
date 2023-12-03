@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Headers } from '../Components/Headers/Headers';
-import { FormHook } from '../Components/Forms/HookForm';
+import { FormHook } from '../Components/Forms/Hook-forms/HookForm';
 export const HookForm = () => {
   return (
     <div className="container">
       <header className="header">
-        <Headers text="Hook form" headingType="h2" className="hook-title" />
         <nav>
           <Link to={'/'}>Main</Link>
           <Link to={'/form-uncontrolled'}>Form-uncontrolled</Link>

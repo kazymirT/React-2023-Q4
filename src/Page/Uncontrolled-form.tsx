@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
-import { Headers } from '../Components/Headers/Headers';
+
+import UncontrolledFormPage from '../Components/Forms/Uncontrolled-form/UncontrolledForm';
 export const UncontrolledForm = () => {
   return (
-    <>
-      <header>
-        <Headers
-          text="Form Uncontrolled"
-          className="uncontrolled-title"
-          headingType="h2"
-        />
+    <div className="container">
+      <header className="header">
         <nav>
           <Link to={'/'}>Main</Link>
           <Link to={'/form-hook'}>Form hook</Link>
         </nav>
       </header>
-      <main>Form Uncontrolled</main>
-    </>
+      <main className="main">
+        <h3>Uncontrolled form</h3>
+        <UncontrolledFormPage />
+      </main>
+    </div>
   );
 };

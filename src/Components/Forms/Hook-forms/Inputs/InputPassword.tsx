@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { showPasswordStrength } from '../utils/showPassword';
+import { showPasswordStrength } from '../../../utils/showPassword';
 import { UseFormRegister } from 'react-hook-form';
-import { IForm } from '../Forms/HookForm';
+import { IForm } from '../../../utils/type';
+import { ProgressBar } from '../../../ProgressBar';
 
 export type Register = UseFormRegister<IForm>;
 
@@ -33,28 +34,32 @@ export default function InputPassword(props: FormHookPasswordsProps) {
   return (
     <>
       <div className="input-group">
-        <label htmlFor="password"></label>
-        <br />
+        <div style={{ height: '10px' }}>
+          <ProgressBar strength={strength} />
+        </div>
         <input
           type="password"
           placeholder="Password"
           id="password"
           {...register('password')}
         />
-        <p>{errorPassword ? errorPassword : ''}</p>
-        {strength ? <div>Strength: {strength} of 4</div> : <></>}
+        <div className={'error-container'}>
+          {errorPassword && <p className={'error-message'}>{errorPassword}</p>}
+        </div>
       </div>
 
       <div className="input-group">
-        <label htmlFor="password-confirm"></label>
-        <br />
         <input
           type="password"
           id="password-confirm"
           placeholder="Confirm password"
           {...register('confirmPassword')}
         />
-        <p>{errorPasswordRepeat ? errorPasswordRepeat : ''}</p>
+        <div className={'error-container'}>
+          {errorPasswordRepeat && (
+            <p className={'error-message'}>{errorPasswordRepeat}</p>
+          )}
+        </div>
       </div>
     </>
   );

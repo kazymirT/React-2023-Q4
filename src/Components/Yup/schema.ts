@@ -41,8 +41,8 @@ export const schema = yup.object().shape({
     ),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Passwords must match')
-    .required('Please confirm your password'),
+    .required('This is a required field')
+    .oneOf([yup.ref('password')], 'Passwords must match'),
   accept: yup.boolean().test({
     name: 'accepted',
     message: 'You must accept the terms and conditions',
