@@ -3,6 +3,7 @@ import { Headers } from '../Components/Headers/Headers';
 
 export const Page404 = () => {
   const navigate = useNavigate();
+
   return (
     <div className="notFoundField">
       <Headers text="404" className="title" headingType="h2" />

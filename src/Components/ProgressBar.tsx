@@ -19,6 +19,7 @@ export const ProgressBar = ({ strength }: Props) => {
         return 'transparent';
     }
   };
+
   return (
     <div className="progress-bar">
       <div

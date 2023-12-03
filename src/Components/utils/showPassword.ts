@@ -1,5 +1,5 @@
 import { ValidationError } from 'yup';
-import { passwordSchema } from '../Yup/passwordShema';
+import { passwordSchema } from '../Yup/passwordSchema';
 
 export async function showPasswordStrength(password: string): Promise<number> {
   const maxStrength = 4;

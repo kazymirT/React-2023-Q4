@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Headers } from '../Components/Headers/Headers';
+
 export const ErrorPage = () => {
   const navigate = useNavigate();
+
   return (
     <main>
       <h2 className="text-5xl">Page not found</h2>

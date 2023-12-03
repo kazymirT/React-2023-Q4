@@ -64,12 +64,3 @@ export default function InputPassword(props: FormHookPasswordsProps) {
     </>
   );
 }
-
-{
-  /* <div className="input-group">
-      <label htmlFor={id}>{label}</label>
-      <br />
-      <input id={id} {...register} placeholder={placeholder} type={type} />
-      <p>{errorMessage}</p>
-    </div> */
-}

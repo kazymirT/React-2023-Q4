@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-
 import UncontrolledFormPage from '../Components/Forms/Uncontrolled-form/UncontrolledForm';
+
 export const UncontrolledForm = () => {
   return (
     <div className="container">
